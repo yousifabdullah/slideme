@@ -4,6 +4,5 @@
 
 **Dokumentaatio:**
 
-[Aiheen kuvaus](dokumentointi/aiheenKuvausJaRakenne.md)
-
-[Viikkoraportti (tiralabra)](dokumentointi/viikkoraportti.md)
+* [Aiheen kuvaus](dokumentointi/aiheenKuvausJaRakenne.md)
+* [Viikkoraportti (tiralabra)](dokumentointi/viikkoraportti.md)
