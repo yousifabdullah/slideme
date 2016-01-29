@@ -7,11 +7,8 @@
 **Pelaajan toiminnot:**
 
 * Numeroidun ruudun siirto vapaaruudun tilalle
-
   * onnistuu, kun vapaaruutu on naapurina pysty- tai vaakatasolla
-
 * Ruutujen sekoitus uuden pelitilanteen luomiseksi
-
 * Simulaation käynnistys, jossa tekoäly ratkaisee pelitilanteen
 
 **Tarkempi selvitys projektista:**
