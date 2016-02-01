@@ -7,7 +7,7 @@ package com.yousif.slideme.core;
  */
 public final class Board {
     
-    // Alustetaan muistiin sekä nykyinen pelitilanne että ratkaisu
+    // Alustetaan muistiin sekä nykyinen pelitilanne että ratkaisu.
     private final int[] board;
     private final int[] solution;
     
@@ -15,7 +15,7 @@ public final class Board {
         this.board = new int[] {1, 2, 3, 4, 5, 6, 7, 8, 0};
         this.solution = Array.copy(this.board);
         
-        // Luodaan aina uusi sekoitettu järjestys olion luontihetkellä
+        // Luodaan aina uusi sekoitettu järjestys olion luontihetkellä.
         this.shuffleOrder();
     }
     

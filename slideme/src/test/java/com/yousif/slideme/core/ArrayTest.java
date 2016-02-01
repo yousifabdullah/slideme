@@ -11,6 +11,7 @@ import static org.junit.Assert.*;
  */
 public class ArrayTest {
     
+    // Array.swap()-metodin yksikkötestit.
     @Test
     public void swapIndexesWithinBoundaries() {
         int[] array = new int[]{1, 2, 3, 4};
@@ -35,6 +36,7 @@ public class ArrayTest {
         assertTrue(Arrays.equals(array, new int[]{1, 2, 3, 4}));
     }
     
+    // Array.copy()-metodin yksikkötestit.
     @Test
     public void copyPopulatedArray() {
         int[] array1 = new int[]{1, 2, 3, 4};
@@ -51,6 +53,7 @@ public class ArrayTest {
         assertTrue(Arrays.equals(array1, array2));
     }
     
+    // Array.matches()-metodin yksikkötestit.
     @Test
     public void matchesPopulatedArray() {
         int[] array1 = new int[]{1, 2, 3, 4};
@@ -83,9 +86,11 @@ public class ArrayTest {
         assertFalse(Array.matches(array1, array2));
     }
     
+    // Array.swapFirstInversion()-metodin yksikkötestit.
     @Test
     public void swapFirstInversionWithoutInversions() {
         int[] array = new int[]{1, 2, 3, 0};
+        Array.swapFirstInversion(array);
         
         assertTrue(Arrays.equals(array, new int[]{1, 2, 3, 0}));
     }
@@ -93,12 +98,13 @@ public class ArrayTest {
     @Test
     public void swapFirstInversionWithoutInversionsOrZero() {
         int[] array = new int[]{1, 2, 3, 4};
+        Array.swapFirstInversion(array);
         
         assertTrue(Arrays.equals(array, new int[]{1, 2, 3, 4}));
     }
     
     @Test
-    public void swapFirstInversionWithoutZeroInArray() {
+    public void swapFirstInversionWithoutZero() {
         int[] array = new int[]{1, 2, 4, 3};
         Array.swapFirstInversion(array);
         
@@ -121,6 +127,7 @@ public class ArrayTest {
         assertTrue(Arrays.equals(array, new int[]{1, 0, 3, 4}));
     }
     
+    // Array.countInversions()-metodin yksikkötestit.
     @Test
     public void countInversionsWithoutInversions() {
         int[] array = new int[]{1, 2, 3, 0};
@@ -149,9 +156,10 @@ public class ArrayTest {
         assertEquals(1, Array.countInversions(array));
     }
     
+    // Array.shuffleWithEvenInversions()-metodin yksikkötestit.
     @Test
     public void shuffleWithEvenInversionsNoOddInversions() {
-        int[] array = new int[]{1, 2, 3, 4};
+        int[] array = new int[]{2, 1, 3, 4};
         Array.shuffleWithEvenInversions(array);
         
         assertEquals(0, Array.countInversions(array) % 2);

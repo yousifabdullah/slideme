@@ -22,3 +22,7 @@
 **Määrittelyvaiheen luokkakaavio:**
 
 ![Projektin pääluokat ovat: UI, Solver ja Board.](luokkakaavio.png)
+
+**Konsepti graafiselle käyttöliittymälle:**
+
+![Ominaista konseptille on minimaalisuus ja selkeys.](kayttoliittyma.png)

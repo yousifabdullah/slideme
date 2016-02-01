@@ -11,3 +11,7 @@
 **29.1.2016:** 3 tuntia
 
 * Ohjelmointi aloitettu ydinalueelta määrittelyvaiheen luokkakaaviota noudattaen. Erilaisten algoritmien tutkiminen (mm. Durstenfeldin algoritmi, bubble sort) ja soveltaminen käyttötarkoitukseen. Javadoc-dokumentoinnin sekä JUnit-yksikkötestien laatiminen. PIT-raportin perusteella sekä koodin että testien parantaminen.
+
+**1.2.2016:** 2 tuntia
+
+* Jatkuvaa testausta sekä koodin parantamista. Aloitettu käyttöliittymän havainnoillistaminen ja pohdittu mahdollisia ratkaisuja käyttöliittymän ja "ytimen" välillä tapahtuvalle toiminnallisuudelle.

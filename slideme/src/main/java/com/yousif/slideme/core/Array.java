@@ -125,10 +125,10 @@ class Array {
         
         for (int i = 0; i < array.length - 1; i++) {
             /*
-            Kun ensimmäinen löydetty indeksipari on käsitelty,
-            loppuu algoritmin toiminta heti.
+            Kun ensimmäinen löydetty indeksipari on käsitelty, loppuu
+            algoritmin toiminta heti.
             */
-            if (swapped == true) {
+            if (swapped) {
                 break;
             }
             
@@ -217,7 +217,7 @@ class Array {
      * @param b toisen alkion indeksi
      */
     static void swap(int[] array, int a, int b) {
-        // Huom. aluksi tarkistetaan, että indeksit löytyvät taulukosta
+        // Huom. aluksi tarkistetaan, että indeksit löytyvät taulukosta.
         if (0 <= a && a <= array.length - 1) {
             if (0 <= b && b <= array.length - 1) {
                 int tmp = array[a];
