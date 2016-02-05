@@ -20,7 +20,28 @@ public final class Board {
         this.board = new int[] {1, 2, 3, 4, 5, 6, 7, 8, 0};
         this.solution = Array.copy(this.board);
         
-        // Huom. -1 merkitsee ei-hyväksyttävää siirtoa.
+        /*
+        Hyväksyttävät siirrot ovat oikeastaan suuntia, joihin jokaisesta
+        peliruudusta on mahdollista siirtyä seuraavaksi. Esim. jos 2.
+        indeksin peliruutu halutaan siirtää, onnistuu se vain, kun joko
+        1. tai 5. indeksin kohdalla on vapaaruutu (eli vasemmalle tai
+        alas siirtymällä).
+        
+        Indeksit luetaan 3*3-ruudun suuruista alustaa noudattaen vasemmalta
+        ylhäältä eli esim. 5. indeksi sijoittuisi toisen rivin viimeiseksi
+        peliruuduksi kuten alla olevassa kuvassa havainnoillistettuna:
+        
+        + - + - + - +
+        | 0 | 1 | 2 |
+        + - + - + - +
+        | 3 | 4 | 5 | <-
+        + - + - + - +
+        | 6 | 7 | 8 |
+        + - + - + - +
+        
+        Huom. ensimmäinen peliruutu sijaitsee siis indeksissä 0 ja siirto-
+        kartalla -1 merkitsee ei-hyväksyttävää siirtoa.
+        */
         this.moves = new int[][] {
             {1, 3, -1, -1}, // 0.
             {0, 2, 4, -1},  // 1.
@@ -68,8 +89,8 @@ public final class Board {
      * Päivittää pelitilanteen siirtämällä annetun indeksin kohdalla
      * sijaitsevan peliruudun vapaaruudun tilalle, mikäli se on mahdollista.
      * 
-     * Koska siirtokartta tarkastellaan yhdellä läpikäynnillä, on
-     * aikavaativuus O(n).
+     * Koska siirtokartasta tarkastellaan annettua indeksiä vastaavat
+     * mahdolliset hyväksyttävät siirrot, on aikavaativuus O(n).
      * 
      * @param from siirrettävän peliruudun indeksi
      * @return true, kun siirto on onnistunut ja muutoin false
@@ -78,20 +99,20 @@ public final class Board {
         // Huom. aluksi tarkistetaan, ettei kyseessä ole vapaaruutu.
         if (this.board[from] != 0) {
             for (int move = 0; move < 4; move++) {
-                // Luetaan muistiin siirtokartan mukainen kohderuutu.
+                // Luetaan muistiin siirtokartasta hyväksyttävät siirot.
                 int to = this.moves[from][move];
                 
                 /*
-                Kun kohderuutu on -1, eli hyväksyttäviä siirtoja ei
-                ole enempää, loppuu algoritmin toiminta heti.
+                Kun siirtokartta palauttaa arvon -1, eli hyväksyttäviä
+                siirtoja ei ole enempää, loppuu algoritmin toiminta heti.
                 */
                 if (to == -1) {
                     break;
                 } else {
                     /*
                     Mikäli siirrettävästä peliruudusta on mahdollista
-                    siirtyä vapaaruutuun, vaihdetaan ruutujen paikat
-                    keskenään.
+                    siirtyä vapaaruutuun, vaihdetaan kyseisten peliruutujen
+                    paikat keskenään.
                     */
                     if (this.board[to] == 0) {
                         Array.swap(this.board, from, to);

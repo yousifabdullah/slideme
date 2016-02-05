@@ -24,13 +24,16 @@ import javax.swing.border.EmptyBorder;
  */
 public class UI implements Runnable, ActionListener {
     
-    // Alustetaan käyttöliittymälle ikkuna ja pelitilanne.
+    // Alustetaan muistiin käyttöliittymän ikkuna ja pelitilanne.
     private JFrame frame;
+    private final String appName;
     
     private final Board board;
     private final JButton[] tiles;
     
     public UI(Board board) {
+        this.appName = "slideme v1";
+        
         this.board = board;
         this.tiles = new JButton[9];
     }
@@ -41,14 +44,12 @@ public class UI implements Runnable, ActionListener {
     @Override
     public void run() {
         // Määritetään käyttöliittymän yleisilme ja -toiminnallisuus.
-        this.frame = new JFrame("slideme");
-        
+        this.frame = new JFrame(this.appName);
         this.frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        this.frame.setResizable(false);
         
         /*
-        Asettaa käyttöliittymän ilmeeksi käytössä olevan käyttö-
-        järjestelmän (esim. Windows / OS X / Linux) oletusilmeen.
+        Asetetaan käyttöliittymän ilmeeksi käytössä olevan käyttö-
+        järjestelmän (esim. Windows / OS X / Linux) oletusilme.
         */
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
@@ -79,15 +80,15 @@ public class UI implements Runnable, ActionListener {
      */
     private void buildComponents(Container container) {
         /*
-        Luodaan peliruuduille pohja, joka käyttää 3*3-suuruista ruudukkoa
-        komponenttien (tässä tapauksessa peliruutujen) asetteluun.
+        Luodaan peliruuduille pohja, joka käyttää 3*3-ruudun suuruista
+        alustaa komponenttien (tässä tapauksessa peliruutujen) asetteluun.
         */
         JPanel top = new JPanel();
         
-        top.setBorder(new EmptyBorder(4, 4, 4, 4));
+        top.setBorder(new EmptyBorder(10, 10, 10, 10));
         top.setPreferredSize(new Dimension(240, 240));
         
-        top.setLayout(new GridLayout(3, 3, 4, 4));
+        top.setLayout(new GridLayout(3, 3, 5, 5));
         
         /*
         Koska peliruutuja käydään läpi kuin taulukkoa, voidaan myös
@@ -104,17 +105,17 @@ public class UI implements Runnable, ActionListener {
             top.add(this.tiles[i]);
         }
         
-        container.add(top, BorderLayout.PAGE_START);
+        container.add(top, BorderLayout.CENTER);
         
         // Luodaan muille toiminnallisuuksille erillinen pohja.
         JPanel bottom = new JPanel();
         
-        bottom.setBorder(new EmptyBorder(0, 4, 4, 4));
+        bottom.setBorder(new EmptyBorder(0, 10, 10, 10));
         bottom.setPreferredSize(new Dimension(240, 30));
         
-        bottom.setLayout(new BorderLayout(2, 0));
+        bottom.setLayout(new BorderLayout(3, 0));
         
-        // "Slide me!" -painike ja sen tapahtumakomennon lisäys.
+        // Lisätään "Slide me!" -painike ja sen tapahtumakomento.
         JButton slideme = new JButton("Slide me!");
         slideme.setFocusable(false);
         
@@ -123,7 +124,7 @@ public class UI implements Runnable, ActionListener {
         
         bottom.add(slideme, BorderLayout.CENTER);
         
-        // "Shuffle" -painike ja sen tapahtumakomennon lisäys.
+        // Lisätään "Shuffle" -painike ja sen tapahtumakomento.
         JButton shuffle = new JButton("Shuffle");
         shuffle.setFocusable(false);
         
@@ -138,7 +139,7 @@ public class UI implements Runnable, ActionListener {
     /**
      * Päivittää peliruutujen arvot nykyisen pelitilanteen mukaisesti.
      */
-    private void refreshTiles() {
+    void refreshTiles() {
         // Luetaan muistiin nykyinen pelitilanne.
         int[] state = this.board.getCurrentState();
         
@@ -156,6 +157,11 @@ public class UI implements Runnable, ActionListener {
                 this.tiles[i].setVisible(true);
             }
         }
+        
+        // Päivityksen yhteydessä tarkistetaan, onko peli ratkaistu.
+        if (this.board.foundSolution()) {
+            JOptionPane.showMessageDialog(this.frame, "Mahtavaa, peliruudut ovat taas järjestyksessä!", this.appName, JOptionPane.INFORMATION_MESSAGE);
+        }
     }
     
     /**
@@ -166,7 +172,7 @@ public class UI implements Runnable, ActionListener {
      */
     @Override
     public void actionPerformed(ActionEvent event) {
-        String command = event.getActionCommand();
+        String action = event.getActionCommand();
         
         /*
         Mikäli tapahtumakomento on numero, eli yksi peliruuduista
@@ -175,27 +181,25 @@ public class UI implements Runnable, ActionListener {
         manuaalisesti.
         */
         try {
-            int index = Integer.parseInt(command);
-            this.board.moveTile(index);
+            int from = Integer.parseInt(action);
+            
+            if (this.board.moveTile(from)) {
+                // Onnistuneen siirron jälkeen peliruudut aina päivitetään.
+                this.refreshTiles();
+            }
         } catch (NumberFormatException exception) {
-            switch (command) {
+            switch (action) {
                 case "slideme":
-                    // Käynnistää tekoälyn simulaation.
-                    JOptionPane.showMessageDialog(this.frame, "Can't slide yet!");
+                    // Käynnistetään tekoälyn simulaatio.
+                    JOptionPane.showMessageDialog(this.frame, "Can't slide yet!", this.appName, JOptionPane.INFORMATION_MESSAGE);
                     break;
                 case "shuffle":
-                    // Luo uuden pelitilanteen sekoittamalla peliruudut.
+                    // Luodaan uusi pelitilanne sekoittamalla peliruudut.
                     this.board.shuffleOrder();
+                    this.refreshTiles();
+                    
                     break;
             }
-        }
-        
-        // Päivitetään peliruudut jokaisen tapahtuman jälkeen.
-        this.refreshTiles();
-        
-        // Tarkistetaan, onko peli ratkaistussa tilassa.
-        if (this.board.foundSolution()) {
-            JOptionPane.showMessageDialog(this.frame, "Mahtavaa, peliruudut ovat taas järjestyksessä!");
         }
     }
 }

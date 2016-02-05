@@ -13,7 +13,8 @@
 
 **Tarkempi selvitys projektista:**
 
-* Toteutetaan A*-algoritmi sek‰ BFS-algoritmi pelitilanteen ratkaisemiseen. Algoritmien aikavaativuuden tavoitteena on O(|V| + |E|). Tilavaativuuden kannalta on olennaisinta s‰ilytt‰‰ 8-pelin peliruutujen j‰rjestys taulukossa, joka tarvittaessa kopioidaan muistiin, siis O(n). P‰‰asiallinen l‰hde projektille: https://www.cs.princeton.edu/courses/archive/fall12/cos226/assignments/8puzzle.html ja erityisesti A*-algoritmille: http://theory.stanford.edu/~amitp/GameProgramming/Heuristics.html.
+* Toteutetaan A*-algoritmi sek‰ BFS-algoritmi pelitilanteen ratkaisemiseen. Algoritmien aikavaativuuden tavoitteena on O(|V| + |E|). Tilavaativuuden kannalta on olennaisinta s‰ilytt‰‰ 8-pelin peliruutujen j‰rjestys taulukossa, joka tarvittaessa kopioidaan muistiin, siis O(n).
+  * P‰‰asiallinen l‰hde projektille: https://www.cs.princeton.edu/courses/archive/fall12/cos226/assignments/8puzzle.html ja erityisesti A*-algoritmille: http://theory.stanford.edu/~amitp/GameProgramming/Heuristics.html.
 
 * Valitsin kyseisen projektin, koska se on minulle mielenkiintoinen ongelma: miten erilaiset algoritmit ratkaisevat saman ongelman ja eroavatko ne nopeudessa tai tehokkuudessa olennaisesti. 8-peli suo yksinkertaisen ymp‰ristˆn t‰llaiselle kokeilulle, kun taas toisaalta monimutkaisempi ongelma (esim. 15-peli) rajoittaa k‰ytett‰vi‰ algoritmeja huomattavasti. A*-algoritmi kiehtoaa minua myˆs silt‰ osin, ett‰ se ei ollut osana tira-kurssia, mutta sit‰ sivuttiin lyhyesti "ylikurssina". Erityisesti teko‰ly peleiss‰ on minulle kiinnostava aihe ja t‰st‰ saan hyv‰t ev‰‰t kokeilemaan teko‰lyn kehitt‰mist‰ peliss‰.
 
@@ -22,6 +23,10 @@
 **M‰‰rittelyvaiheen luokkakaavio:**
 
 ![Projektin p‰‰luokat ovat: UI, Solver ja Board.](luokkakaavio.png)
+
+**Tarkempi luokkakaavio ohjelmakoodin perusteella::**
+
+![Luokkakaavioon erityisen‰ lis‰yksen‰ tuli Array-apuluokka.](luokkakaavio2.png)
 
 **Konsepti graafiselle k‰yttˆliittym‰lle:**
 

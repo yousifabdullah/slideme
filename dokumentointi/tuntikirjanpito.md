@@ -15,3 +15,8 @@
 **1.2.2016:** 2 tuntia
 
 * Jatkuvaa testausta sekä koodin parantamista. Aloitettu käyttöliittymän havainnoillistaminen ja pohdittu mahdollisia ratkaisuja käyttöliittymän ja "ytimen" välillä tapahtuvalle toiminnallisuudelle.
+
+**4.2.2016:** 7 tuntia
+**5.2.2016:** 3 tuntia
+
+* Käyttöliittymän toteutus ja testaus. Koska käyttöliittymän yksikkötestit eivät ole osa projektia, on käyttökokemusta testattu manuaalisesti. Yleisimmät ja tärkeimmät rajatapaukset ovat näin ollen otettu huomioon raa'alla kokeilulla ja käyttöliittymää on aina paranneltu sen mukaisesti, kun käyttöä parantavia tekijöitä on havaittu. Peli on tässä vaiheessa jo pelattavassa muodossa ja toimii sääntöjen nojalla odotetusti. Laadittu katselmointi (javalabra) sekä päivitetty dokumentaatiota.
