@@ -24,7 +24,7 @@
 
 ![Projektin p‰‰luokat ovat: UI, Solver ja Board.](luokkakaavio.png)
 
-**Tarkempi luokkakaavio ohjelmakoodin perusteella::**
+**Tarkempi luokkakaavio ohjelmakoodin perusteella:**
 
 ![Luokkakaavioon erityisen‰ lis‰yksen‰ tuli Array-apuluokka.](luokkakaavio2.png)
 

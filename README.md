@@ -5,4 +5,5 @@
 **Dokumentaatio:**
 
 * [Aiheen kuvaus](dokumentointi/aiheenKuvausJaRakenne.md)
+* [Tuntikirjanpito](dokumentointi/tuntikirjanpito.md)
 * [Viikkoraportti (tiralabra)](dokumentointi/viikkoraportti.md)
