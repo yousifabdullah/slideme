@@ -1,0 +1,7 @@
+**29.1.2016:**
+
+* Laadittu kattavat yksikkötestit Array-apuluokalle. Luokan toimivuus on hyvin tärkeää koko projektin kannalta, eli laajamittaiset testit ovat myös tärkeitä. Apuluokan kaikkia metodeja ei kuitenkaan voi testata, esim. sekoitusalgoritmin toimintaa on vaikea testata millään tavalla eikä sen oikeellisuutta pysty nyt kunnolla arvioimaan. Yksikkötestejä ei laadittu Board-luokalle lainkaan, koska siinä ei ole mitään erityistä, mitä pitäisi testata ja se lähinnä kutsuu Array-apuluokan metodeja omissa metodeissaan.
+
+**5.2.2016:**
+
+* Yksikkötestejä ei laadittu lainkaan. Koska ohjelmakoodi muokkautui pääosin käyttöliittymän osalta, kului aikaa manuaaliseen käyttöliittymän testaamiseen. Erikseen yksikkötestejä käyttöliittymälle ei siis laadittu. Projektin asetuksia on myös muutettu niin, ettei käyttöliittymän luokkia sisällytetä PIT-raportteihin. Manuaaliseen käyttöliittymän testaamiseen kuului mm. eri toiminnallisuuksien kokeilu siinä määrin, mikä on sallittua ja mikä ei ole sallittua. Peliä on pelattu useita tunteja, kun samalla käyttöliittymää on paranneltu aina sen mukaisesti, kun on parannuskeinoja ja epätoivottua toimintaa havaittu. Käyttökokemukseen on panostettu erityisesti, ettei peli vaikuta kankealta käytön kannalta. Mielipiteitä käyttöliittymästä, komponenttien sijoittelusta sekä toiminnallisuudesta on myös kysytty lähipiiristä ja käyttöliittymää muokattu vastaavasti.
