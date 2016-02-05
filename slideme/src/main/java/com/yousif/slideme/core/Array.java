@@ -28,7 +28,7 @@ class Array {
             Math.random()-metodin tuottama satunnaisarvo kerrotaan
             arvolla (i + 1) eikä vain i:llä.
             */
-            swap(array, i, (int) Math.floor(Math.random() * (i + 1)));
+            Array.swap(array, i, (int) Math.floor(Math.random() * (i + 1)));
         }
         
         /*
@@ -45,8 +45,8 @@ class Array {
         ratkaistavissa olevat pelitilanteet noudattavat rakennetta,
         jossa on parillinen määrä inversioita.
         */
-        if (countInversions(array) % 2 != 0) {
-            swapFirstInversion(array);
+        if (Array.countInversions(array) % 2 != 0) {
+            Array.swapFirstInversion(array);
         }
     }
     
@@ -76,7 +76,7 @@ class Array {
         
         Tämän takia algoritmin tilavaativuus on O(n).
         */
-        int[] copy = copy(array);
+        int[] copy = Array.copy(array);
         
         int inversions = 0;
         boolean swapped = true;
@@ -91,7 +91,7 @@ class Array {
                         inversions++;
                     }
                     
-                    swap(copy, i, i + 1);
+                    Array.swap(copy, i, i + 1);
                     swapped = true;
                 }
             }
@@ -152,7 +152,7 @@ class Array {
                 if (array[i] < array[j]) {
                     break;
                 } else if (array[j] != 0) {
-                    swap(array, i, j);
+                    Array.swap(array, i, j);
                     swapped = true;
                         
                     break;
