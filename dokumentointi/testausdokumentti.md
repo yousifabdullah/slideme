@@ -5,3 +5,7 @@
 **5.2.2016:**
 
 * Yksikkötestejä ei laadittu lainkaan. Koska ohjelmakoodi muokkautui pääosin käyttöliittymän osalta, kului aikaa manuaaliseen käyttöliittymän testaamiseen. Erikseen yksikkötestejä käyttöliittymälle ei siis laadittu. Projektin asetuksia on myös muutettu niin, ettei käyttöliittymän luokkia sisällytetä PIT-raportteihin. Manuaaliseen käyttöliittymän testaamiseen kuului mm. eri toiminnallisuuksien kokeilu siinä määrin, mikä on sallittua ja mikä ei ole sallittua. Peliä on pelattu useita tunteja, kun samalla käyttöliittymää on paranneltu aina sen mukaisesti, kun on parannuskeinoja ja epätoivottua toimintaa havaittu. Käyttökokemukseen on panostettu erityisesti, ettei peli vaikuta kankealta käytön kannalta. Mielipiteitä käyttöliittymästä, komponenttien sijoittelusta sekä toiminnallisuudesta on myös kysytty lähipiiristä ja käyttöliittymää muokattu vastaavasti.
+
+**12.2.2016:**
+
+* Array-apuluokan osalta muutama yksikkötesti on laadittu testaamaan uutta aputoimintoa. Muutoin ohjelmakoodi on muokkautunut lähinnä tekoälyn kannalta, mutta on yhä varhaisessa vaiheessa sen osalta, minkä vuoksi tekoälyyn liittyviä uusia luokkia ei ole erikseen testattu. Yksikkötestejä on luvasssa, mutta ensiksi on minun ymmärrettävä haluamani tekoälyn toiminnallisuus yleisellä tasolla. Halutun toiminnallisuuden aikaansaamiseksi on vielä opittava lisää tekoälyn toteutuksesta ja viimein toteuttaa se. Mahdollinen ratkaisu mm. tekoälyn välivaiheiden ylläpitoon on saanut alkunsa. Mikäli toteutus etenee odotetusti, on seuraava looginen askel testata toiminnallisuutta.

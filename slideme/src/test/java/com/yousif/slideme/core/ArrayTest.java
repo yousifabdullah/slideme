@@ -36,6 +36,21 @@ public class ArrayTest {
         assertTrue(Arrays.equals(array, new int[]{1, 2, 3, 4}));
     }
     
+    // Array.indexOf()-metodin yksikkötestit.
+    @Test
+    public void indexOfValueWithinBoundaries() {
+        int[] array = new int[]{1, 2, 3, 4};
+        
+        assertEquals(2, Array.indexOf(array, 3));
+    }
+    
+    @Test
+    public void indexOfValueOutsideBoundaries() {
+        int[] array = new int[]{1, 2, 3, 4};
+        
+        assertEquals(-1, Array.indexOf(array, 5));
+    }
+    
     // Array.copy()-metodin yksikkötestit.
     @Test
     public void copyPopulatedArray() {

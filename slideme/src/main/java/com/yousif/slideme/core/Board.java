@@ -68,6 +68,15 @@ public final class Board {
     }
     
     /**
+     * Palauttaa ratkaistun pelitilanteen taulukkona.
+     * 
+     * @return ratkaistu pelitilanne int[]-taulukkona
+     */
+    public int[] getSolvedState() {
+        return this.solution;
+    }
+    
+    /**
      * Tarkistaa nykyisen pelitilanteen ja palauttaa arvon true, mikäli
      * se vastaa ratkaisua.
      * 

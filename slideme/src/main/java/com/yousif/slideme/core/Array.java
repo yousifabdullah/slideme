@@ -5,7 +5,7 @@ package com.yousif.slideme.core;
  * 
  * @author Yousif Abdullah <yousif.abdullah@helsinki.fi>
  */
-class Array {
+public class Array {
     
     /**
      * Sekoittaa taulukon alkiot satunnaiseen järjestykseen käyttäen
@@ -19,7 +19,7 @@ class Array {
      * @param array sekoitettava int[]-taulukko
      * @see com.yousif.slideme.core.Array#countInversions(int[])
      */
-    static void shuffleWithEvenInversions(int[] array) {
+    public static void shuffleWithEvenInversions(int[] array) {
         for (int i = array.length - 1; i > 0; i--) {
             /*
             Huom. algoritmi toimii halutulla tavalla, kun kaikki
@@ -68,7 +68,7 @@ class Array {
      * @see com.yousif.slideme.core.Array#swapFirstInversion(int[])
      * @return inversioiden määrä int-arvona
      */
-    static int countInversions(int[] array) {
+    public static int countInversions(int[] array) {
         /*
         Koska inversiot lasketaan bubble sortia käyttäen, joka
         oikeastaan järjestää taulukon, kopioidaan annettu taulukko,
@@ -120,7 +120,7 @@ class Array {
      * @param array korjattava int[]-taulukko
      * @see com.yousif.slideme.core.Array#shuffleWithEvenInversions(int[])
      */
-    static void swapFirstInversion(int[] array) {
+    public static void swapFirstInversion(int[] array) {
         boolean swapped = false;
         
         for (int i = 0; i < array.length - 1; i++) {
@@ -172,7 +172,7 @@ class Array {
      * @param b toinen vertailtava int[]-taulukko
      * @return true, kun taulukot ovat identtiset ja muutoin false
      */
-    static boolean matches(int[] a, int[] b) {
+    public static boolean matches(int[] a, int[] b) {
         /*
         Taulukkojen vertailu voidaan lopettaa heti, jos niiden pituus
         eroaa eli taulukoissa on eri määrä alkioita.
@@ -195,10 +195,10 @@ class Array {
      * paluuarvona. Taulukon alkiot käydään kerran läpi eli aikavaativuus
      * on O(n).
      * 
-     * @param kopioitava int[]-taulukko
+     * @param array kopioitava int[]-taulukko
      * @return kopioitu int[]-taulukko
      */    
-    static int[] copy(int[] array) {
+    public static int[] copy(int[] array) {
         int[] copy = new int[array.length];
         
         for (int i = 0; i < array.length; i++) {
@@ -209,6 +209,25 @@ class Array {
     }
     
     /**
+     * Aputoiminto, joka hakee annetun arvon sijainnin eli indeksin
+     * taulukosta. Palauttaa arvon -1, mikäli annettua arvoa ei löydy.
+     * Taulukon alkiot käydään kerran läpi eli aikavaativuus on O(n).
+     * 
+     * @param array käsiteltävä int[]-taulukko
+     * @param value taulukosta haettava int-arvo
+     * @return haetun arvon indeksi taulukossa
+     */
+    public static int indexOf(int[] array, int value) {
+        for (int i = 0; i < array.length; i++) {
+            if (array[i] == value) {
+                return i;
+            }
+        }
+        
+        return -1;
+    }
+    
+    /**
      * Aputoiminto, joka vaihtaa annetun indeksiparin alkiot keskenään.
      * Toiminnon aikavaativuus on O(1).
      * 
@@ -216,7 +235,7 @@ class Array {
      * @param a ensimmäisen alkion indeksi
      * @param b toisen alkion indeksi
      */
-    static void swap(int[] array, int a, int b) {
+    public static void swap(int[] array, int a, int b) {
         // Huom. aluksi tarkistetaan, että indeksit löytyvät taulukosta.
         if (0 <= a && a <= array.length - 1) {
             if (0 <= b && b <= array.length - 1) {
