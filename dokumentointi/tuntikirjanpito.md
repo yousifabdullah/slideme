@@ -30,4 +30,4 @@
 
 **15.2.2016:** 6 tuntia
 
-* *Tiralabra:* A*-algoritmiin syvällisempi tutustuminen ja ensimmäisen toimivan version toteutus. Nyt tekoäly löytää algoritmin avulla lyhimmän polun, mutta tekee niin vain tulostamalla sen, simuloimatta sitä käyttöliittymässä. Yksikkötestejä laadittu kattavasti uudelle State-luokalle, joka ylläpitää tekoälyn välivaiheita. Aloitettu luonnostelemaan toteutusdokumenttia ja suoritettu vertaisarviointi.
+* *Tiralabra:* A*-algoritmiin syvällisempi tutustuminen ja ensimmäisen toimivan version toteutus. Nyt tekoäly löytää algoritmin avulla lyhimmän polun, mutta tekee niin vain tulostamalla sen, simuloimatta sitä käyttöliittymässä. Yksikkötestejä laadittu kattavasti uudelle State-luokalle, joka ylläpitää tekoälyn välivaiheita. Aloitettu toteutusdokumentin luonnos ja suoritettu vertaisarviointi.
