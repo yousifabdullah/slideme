@@ -51,6 +51,31 @@ public class ArrayTest {
         assertEquals(-1, Array.indexOf(array, 5));
     }
     
+    // Array.asInteger()-metodin yksikkötestit.
+    @Test
+    public void asIntegerEmptyArray() {
+        int[] array = new int[0];
+        int value = Array.asInteger(array);
+        
+        assertEquals(0, value);
+    }
+    
+    @Test
+    public void asIntegerWithZeroInFirstIndex() {
+        int[] array = new int[]{0, 1, 2, 3};
+        int value = Array.asInteger(array);
+        
+        assertEquals(123, value);
+    }
+    
+    @Test
+    public void asIntegerWithZeroInLastIndex() {
+        int[] array = new int[]{1, 2, 3, 0};
+        int value = Array.asInteger(array);
+        
+        assertEquals(1230, value);
+    }
+    
     // Array.copy()-metodin yksikkötestit.
     @Test
     public void copyPopulatedArray() {

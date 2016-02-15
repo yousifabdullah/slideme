@@ -9,3 +9,7 @@
 **12.2.2016:**
 
 * Array-apuluokan osalta muutama yksikkötesti on laadittu testaamaan uutta aputoimintoa. Muutoin ohjelmakoodi on muokkautunut lähinnä tekoälyn kannalta, mutta on yhä varhaisessa vaiheessa sen osalta, minkä vuoksi tekoälyyn liittyviä uusia luokkia ei ole erikseen testattu. Yksikkötestejä on luvasssa, mutta ensiksi on minun ymmärrettävä haluamani tekoälyn toiminnallisuus yleisellä tasolla. Halutun toiminnallisuuden aikaansaamiseksi on vielä opittava lisää tekoälyn toteutuksesta ja viimein toteuttaa se. Mahdollinen ratkaisu mm. tekoälyn välivaiheiden ylläpitoon on saanut alkunsa. Mikäli toteutus etenee odotetusti, on seuraava looginen askel testata toiminnallisuutta.
+
+**15.2.2016:**
+
+* Laadittu kattavasti uusia testejä State-luokalle, joka ylläpitää tekoälyn välivaiheita. Erityisesti tuli huomioida testeissä, ettei esim. A*-algoritmi käy läpi vääränlaisia iteraatioita, jolloin kaikki rajatapaukset oli testattava. Erilaisia pelitilanteita testasin empiirisesti ja mittasin tekoälyn suorituskykyä tunnetusti hankalissa tilanteissa. Hiomista on vielä tehtävä ja erityisesti omat tietorakenteet laadittava korvaamaan nykyisen toteutuksen HashSet- ja PriorityQueue-tietorakenteet. Kun nämä ovat kiitettävässä kunnossa, mitä luultavimmin jo seuraavassa päivityksessä, on aika pitää kirjaa algoritmin tuloksista ja suorituskyvystä. Vielä ei ole sen saralta mitään ihmeellistä raportoitavaa, muuta kuin että tekoäly nykyisellään toimii!

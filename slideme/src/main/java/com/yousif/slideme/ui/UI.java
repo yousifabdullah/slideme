@@ -1,5 +1,7 @@
 package com.yousif.slideme.ui;
 
+import com.yousif.slideme.ai.Solver;
+import com.yousif.slideme.core.Array;
 import com.yousif.slideme.core.Board;
 
 import java.awt.BorderLayout;
@@ -32,7 +34,7 @@ public class UI implements Runnable, ActionListener {
     private final JButton[] tiles;
     
     public UI(Board board) {
-        this.appName = "slideme v1";
+        this.appName = "slideme v1.01";
         
         this.board = board;
         this.tiles = new JButton[9];
@@ -55,6 +57,7 @@ public class UI implements Runnable, ActionListener {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch (Exception exception) {
             // Huom. poikkeukseen ei reagoida, jos ilmettä ei voi muuttaa.
+            return;
         }
         
         Container container = this.frame.getContentPane();
@@ -159,8 +162,10 @@ public class UI implements Runnable, ActionListener {
         }
         
         // Päivityksen yhteydessä tarkistetaan, onko peli ratkaistu.
-        if (this.board.foundSolution()) {
-            JOptionPane.showMessageDialog(this.frame, "Mahtavaa, peliruudut ovat taas järjestyksessä!", this.appName, JOptionPane.INFORMATION_MESSAGE);
+        if (Array.matches(this.board.getCurrentState(), this.board.getFinalState())) {
+            JOptionPane.showMessageDialog(this.frame,
+                    "Mahtavaa, peliruudut ovat taas järjestyksessä!",
+                    this.appName, JOptionPane.INFORMATION_MESSAGE);
         }
     }
     
@@ -191,7 +196,9 @@ public class UI implements Runnable, ActionListener {
             switch (action) {
                 case "slideme":
                     // Käynnistetään tekoälyn simulaatio.
-                    JOptionPane.showMessageDialog(this.frame, "Can't slide yet!", this.appName, JOptionPane.INFORMATION_MESSAGE);
+                    Solver solver = new Solver(this.board);
+                    solver.findPath();
+                    
                     break;
                 case "shuffle":
                     // Luodaan uusi pelitilanne sekoittamalla peliruudut.

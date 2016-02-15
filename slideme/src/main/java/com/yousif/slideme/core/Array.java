@@ -57,16 +57,16 @@ public class Array {
      * vierekkäisten alkioiden vaihtoja taulukkoa järjestäessään.
      * 
      * Pahimmassa tapauksessa bubble sortin aikavaativuus on O(n^2),
-     * mutta kuitenkin soveltuu paremmin haluttuun käyttötarkoitukseen,
+     * mutta kuitenkin soveltuu paremmin haluttuun käyttötarkoitukseen
      * kuin esim. merge sort, jolla inversiot voidaan laskea O(n log n)
      * aikavaativuudella. Erityisesti on huomioitava, että pelitilanne
-     * säilytetään int[]-taulukossa, jossa 0 merkitsee vapaaruutua, eikä
-     * lukua 0. Toisin sanoen inversioita ei lasketa niille pareille,
-     * joissa {@literal i < j, A[i] > A[j] ja A[j] == 0} annetulla taulukolla A.
+     * säilytetään taulukkona, jossa 0 merkitsee vapaaruutua, eikä lukua 0.
+     * Toisin sanoen inversioita ei lasketa niille pareille, joissa
+     * {@literal i < j, A[i] > A[j] ja A[j] == 0} annetulla taulukolla A.
      * 
      * @param array tarkistettava int[]-taulukko
      * @see com.yousif.slideme.core.Array#swapFirstInversion(int[])
-     * @return inversioiden määrä int-arvona
+     * @return inversioiden määrä taulukossa
      */
     public static int countInversions(int[] array) {
         /*
@@ -209,12 +209,34 @@ public class Array {
     }
     
     /**
+     * Esittää annetun taulukon kokonaislukuna, joka vastaa taulukkoa
+     * numeerisesti. Toimintoa voidaan käyttää esim. hashCode()-metodin
+     * lailla, sillä se tuottaa aina yksikäsitteisen paluuarvon jokaiselle
+     * pelitilanteelle väliltä [12345678, 876543210], erityisesti koska
+     * jokainen pelitilanteen alkio on väliltä [0, 8] ja voidaan siksi
+     * esittää yksittäisenä osana kokonaislukua. Koska taulukon alkiot
+     * käydään kerran läpi, on aikavaativuus O(n).
+     * 
+     * @param array käsiteltävä int[]-taulukko
+     * @return taulukon esitys kokonaislukuna
+     */   
+    public static int asInteger(int[] array) {
+        int value = 0;
+        
+        for (int i = 0; i < array.length; i++) {
+            value = 10 * value + array[i];
+        }
+        
+        return value;
+    }
+    
+    /**
      * Aputoiminto, joka hakee annetun arvon sijainnin eli indeksin
-     * taulukosta. Palauttaa arvon -1, mikäli annettua arvoa ei löydy.
+     * taulukosta. Palauttaa arvon -1, mikäli haettua arvoa ei löydy.
      * Taulukon alkiot käydään kerran läpi eli aikavaativuus on O(n).
      * 
      * @param array käsiteltävä int[]-taulukko
-     * @param value taulukosta haettava int-arvo
+     * @param value taulukosta haettava arvo
      * @return haetun arvon indeksi taulukossa
      */
     public static int indexOf(int[] array, int value) {

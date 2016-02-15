@@ -36,9 +36,11 @@
                 <version>1.1.8</version>
                 <configuration>
                     <targetClasses>
+                        <param>com.yousif.slideme.ai.*</param>
                         <param>com.yousif.slideme.core.*</param>
                     </targetClasses>
                     <targetTests>
+                        <param>com.yousif.slideme.ai.*</param>
                         <param>com.yousif.slideme.core.*</param>
                     </targetTests>
                 </configuration>

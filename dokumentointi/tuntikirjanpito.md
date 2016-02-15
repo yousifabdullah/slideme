@@ -27,3 +27,7 @@
 **12.2.2016:** 2 tuntia
 
 * Tekoälyn suunnittelu ja varhainen toteutus. Aloitettu hahmottelemaan A*-algoritmin heuristista funktiota Manhattan-etäisyyttä käyttäen sekä mahdollinen ratkaisu tekoälyn välivaiheiden ylläpidolle State-luokan avulla. Toimivaa algoritmia ei vielä ole, minkä vuoksi yksikkötestejä ei myöskään ole. Tekoälyn osuus projektissa on suuri ja varsinainen toteutus vaatii vielä työtä mm. algoritmin ymmärtämisen saralla. Uusi lähde on löytynyt juuri sitä varten ja hiljalleen on projektin runkoon muodostumassa näkemykseni kaltainen toteutus tekoälystä.
+
+**15.2.2016:** 6 tuntia
+
+* *Tiralabra:* A*-algoritmiin syvällisempi tutustuminen ja ensimmäisen toimivan version toteutus. Nyt tekoäly löytää algoritmin avulla lyhimmän polun, mutta tekee niin vain tulostamalla sen, simuloimatta sitä käyttöliittymässä. Yksikkötestejä laadittu kattavasti uudelle State-luokalle, joka ylläpitää tekoälyn välivaiheita. Aloitettu luonnostelemaan toteutusdokumenttia ja suoritettu vertaisarviointi.

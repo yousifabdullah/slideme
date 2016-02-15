@@ -14,7 +14,7 @@ public final class Board {
     private final int[] board;
     private final int[] solution;
     
-    private final int[][] moves;
+    private final int[][] movesMap;
     
     public Board() {
         this.board = new int[] {1, 2, 3, 4, 5, 6, 7, 8, 0};
@@ -42,7 +42,7 @@ public final class Board {
         Huom. ensimmäinen peliruutu sijaitsee siis indeksissä 0 ja siirto-
         kartalla -1 merkitsee ei-hyväksyttävää siirtoa.
         */
-        this.moves = new int[][] {
+        this.movesMap = new int[][] {
             {1, 3, -1, -1}, // 0.
             {0, 2, 4, -1},  // 1.
             {1, 5, -1, -1}, // 2.
@@ -72,18 +72,8 @@ public final class Board {
      * 
      * @return ratkaistu pelitilanne int[]-taulukkona
      */
-    public int[] getSolvedState() {
+    public int[] getFinalState() {
         return this.solution;
-    }
-    
-    /**
-     * Tarkistaa nykyisen pelitilanteen ja palauttaa arvon true, mikäli
-     * se vastaa ratkaisua.
-     * 
-     * @return true, kun pelitilanne vastaa ratkaisua ja muutoin false
-     */
-    public boolean foundSolution() {
-        return Array.matches(this.board, this.solution);
     }
     
     /**
@@ -109,7 +99,7 @@ public final class Board {
         if (this.board[from] != 0) {
             for (int move = 0; move < 4; move++) {
                 // Luetaan muistiin siirtokartasta hyväksyttävät siirot.
-                int to = this.moves[from][move];
+                int to = this.movesMap[from][move];
                 
                 /*
                 Kun siirtokartta palauttaa arvon -1, eli hyväksyttäviä

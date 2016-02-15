@@ -1,26 +1,22 @@
 package com.yousif.slideme.ai;
 
 import com.yousif.slideme.core.Array;
-import com.yousif.slideme.core.Board;
-
-import java.util.Objects;
 
 /**
  * Tekoälyn välivaiheita ylläpitävä luokka.
  * 
  * @author Yousif Abdullah <yousif.abdullah@helsinki.fi>
  */
-class State {
+public class State {
     
     /*
-    Alustetaan muistiin nykyinen pelitilanne ja ratkaisu sekä mm. väli-
-    vaiheisiin tarvittavat tiedot edellisestä pelitilanteesta.
+    Alustetaan muistiin nykyinen iteraatio eli sen hetkinen pelitilanne
+    sekä tekoälyn välivaiheisiin tarvittavat muuttujat.
     */
-    private Board board;
-    
-    private final int[] tiles;
+    private final int[] iteration;
     private final int indexOfZero;
     
+    // A*-algoritmia varten käytettävät g- ja h-arvot.
     private final int g;
     private final int h;
     
@@ -28,86 +24,134 @@ class State {
     private final State previous;
     
     // Luodaan ketjulle lähtötilanne nykyisen pelitilanteen mukaisesti.
-    State(Board board) {
+    public State(int[] iteration) {
         // Luetaan muistiin nykyinen pelitilanne.
-        this.board = board;
-        this.tiles = this.board.getCurrentState();
+        this.iteration = iteration;
         
-        // Haetaan vapaaruudun sijainti ja kirjataan se muistiin.
-        this.indexOfZero = Array.indexOf(this.tiles, 0);
+        // Haetaan vapaaruudun sijainti ja kirjataan se ylös.
+        this.indexOfZero = Array.indexOf(this.iteration, 0);
         
+        // Asetetaan lähtöarvo ja päivitetään heuristinen etäisyys.
         this.g = 0;
-        this.h = Solver.heuristic(this.tiles);
+        this.h = Solver.heuristic(this.iteration);
         
         this.previous = null;
     }
     
-    // Luodaan seuraavia iteraatioitaa ketjussa edellisen perusteella.
-    State(State previous, int from) {
+    // Luodaan seuraava iteraatio ketjussa edellisen perusteella.
+    public State(State previous, int newIndex) {
         // Luetaan muistiin edellinen pelitilanne.
-        this.tiles = Array.copy(previous.tiles);
+        this.iteration = Array.copy(previous.iteration);
         
         // Päivitetään vapaaruudun sijainti nykyisessä iteraatiossa.
-        Array.swap(this.tiles, previous.indexOfZero, from);
-        indexOfZero = from;
+        Array.swap(this.iteration, previous.indexOfZero, newIndex);
+        this.indexOfZero = newIndex;
         
+        // Korotetaan lähtöarvoa ja päivitetään heuristinen etäisyys.
         this.g = previous.g + 1;
-        this.h = Solver.heuristic(this.tiles);
+        this.h = Solver.heuristic(this.iteration);
         
         this.previous = previous;
     }
     
-    boolean foundSolution() {
-        return Array.matches(this.tiles, this.board.getSolvedState());
+    /**
+     * Palauttaa nykyisen iteraation taulukkona.
+     * 
+     * @return nykyinen iteraatio int[]-taulukkona
+     */
+    int[] getCurrentIteration() {
+        return this.iteration;
     }
     
-    // VAPAARUUDUN SIIRTO YLÖS, ALAS, VASEMMALLE JA OIKEALLE. TARKISTA.
+    /**
+     * Palauttaa edellisen iteraation State-tietueena.
+     * 
+     * @return edellinen iteraatio State-tietueena
+     */
+    State getPreviousState() {
+        return this.previous;
+    }
     
-    State moveTileDown() {
-        if (this.indexOfZero > 2) {
-            return new State(this, this.indexOfZero - 3);
+    /**
+     * Palauttaa vapaaruudun sijainnin eli indeksin nykyisessä iteraatiossa.
+     * 
+     * @return vapaaruudun indeksi nykyisessä iteraatiossa
+     */
+    int getIndexOfZero() {
+        return this.indexOfZero;
+    }
+    
+    /**
+     * Laskee nykyisen iteraation f-arvon etäisyyden (siis g-arvon) ja
+     * heuristisen funktion perusteella. A*-algoritmin käyttämä minimikeko
+     * ylläpitää iteraatioiden järjestystä juuri f-arvoilla.
+     * 
+     * @return nykyisen iteraation f-arvo
+     */
+    int priority() {
+        return this.g + this.h;
+    }
+    /**
+     * Siirtää vapaaruutua muuttamalla sen indeksiä ja samalla luo uuden
+     * iteraation. Toisin kuin 8-peliä pelatessa, jossa pelaaja siirtää
+     * aina muita peliruutuja vapaaruudun tilalle, siirtyy vapaaruutu
+     * tekoälyssä. Tämän takia on tekoälyn kannalta edullista pitää kirjaa
+     * vapaaruudun sijainnista, jolloin riittää kasvattaa/vähentää sen
+     * indeksiä uuden iteraation luomiseksi.
+     * 
+     * @param direction suunta, johon vapaaruutu siirtyy seuraavaksi
+     * @return uusi iteraatio State-tietueena
+     */
+    State moveTile(String direction) {
+        /*
+        Mikäli vapaaruutua ei annetussa iteraatiossa ole olemassakaan,
+        annetaan paluuarvona null.
+        */
+        if (this.indexOfZero == -1) {
+            return null;
+        }
+        
+        switch (direction) {
+            case "up":
+                return this.indexOfZero > 2 ? new State(this, this.indexOfZero - 3) : null;
+            case "down":
+                return this.indexOfZero < 6 ? new State(this, this.indexOfZero + 3) : null;
+            case "left":
+                return this.indexOfZero % 3 > 0 ? new State(this, this.indexOfZero - 1) : null;
+            case "right":
+                return this.indexOfZero % 3 < 2 ? new State(this, this.indexOfZero + 1) : null;
         }
         
         return null;
     }
     
-    State moveTileUp() {
-        if (this.indexOfZero < 6) {
-            return new State(this, this.indexOfZero + 3);
-        }
-        
-        return null;
-    }
-    
-    State moveTileLeft() {
-        if (this.indexOfZero % 3 < 2) {
-            return new State(this, this.indexOfZero + 1);
-        }
-        
-        return null;
-    }
-    
-    State moveTileRight() {
-        if (this.indexOfZero % 3 > 0) {
-            return new State(this, this.indexOfZero - 1);
-        }
-        
-        return null;
-    }
-    
+    /**
+     * Aputoiminto HashSet-tietorakenteelle, joka vertailee iteraatioita
+     * keskenään ja palauttaa arvon true, mikäli annettu iteraatio on
+     * identtinen nykyisen iteraation kanssa.
+     * 
+     * @param object iteraatio Object-tietueena
+     * @return true, kun iteraatiot ovat identtiset ja muutoin false
+     */
     @Override
     public boolean equals(Object object) {
         if (object instanceof State) {
             State other = (State) object;
             
-            return Array.matches(this.tiles, other.tiles);
+            return Array.matches(this.iteration, other.iteration);
         }
         
         return false;
     }
     
+    /**
+     * Aputoiminto HashSet-tietorakenteelle, joka palauttaa nykyiselle
+     * iteraatiolle oman hajautusarvon.
+     * 
+     * @return nykyisen iteraation hajautusarvo
+     */
     @Override
     public int hashCode() {
-        return Objects.hashCode(this.tiles);
+        return Array.asInteger(this.iteration);
     }
 }
