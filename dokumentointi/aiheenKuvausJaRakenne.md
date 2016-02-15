@@ -14,6 +14,7 @@
 **Tarkempi selvitys projektista:**
 
 * Toteutetaan A*-algoritmi sekä BFS-algoritmi pelitilanteen ratkaisemiseen. Algoritmien aikavaativuuden tavoitteena on O(|V| + |E|). Tilavaativuuden kannalta on olennaisinta säilyttää 8-pelin peliruutujen järjestys taulukossa, joka tarvittaessa kopioidaan muistiin, siis O(n).
+
   * Pääasiallinen lähde projektille: https://www.cs.princeton.edu/courses/archive/fall12/cos226/assignments/8puzzle.html ja erityisesti A*-algoritmille: http://theory.stanford.edu/~amitp/GameProgramming/Heuristics.html.
 
 * Valitsin kyseisen projektin, koska se on minulle mielenkiintoinen ongelma: miten erilaiset algoritmit ratkaisevat saman ongelman ja eroavatko ne nopeudessa tai tehokkuudessa olennaisesti. 8-peli suo yksinkertaisen ympäristön tällaiselle kokeilulle, kun taas toisaalta monimutkaisempi ongelma (esim. 15-peli) rajoittaa käytettäviä algoritmeja huomattavasti. A*-algoritmi kiehtoaa minua myös siltä osin, että se ei ollut osana tira-kurssia, mutta sitä sivuttiin lyhyesti "ylikurssina". Erityisesti tekoäly peleissä on minulle kiinnostava aihe ja tästä saan hyvät eväät kokeilemaan tekoälyn kehittämistä pelissä.
