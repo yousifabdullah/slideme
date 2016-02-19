@@ -31,3 +31,7 @@
 **15.2.2016:** 6 tuntia
 
 * *Tiralabra:* A*-algoritmiin syvällisempi tutustuminen ja ensimmäisen toimivan version toteutus. Nyt tekoäly löytää algoritmin avulla lyhimmän polun, mutta tekee niin vain tulostamalla sen, simuloimatta sitä käyttöliittymässä. Yksikkötestejä laadittu kattavasti uudelle State-luokalle, joka ylläpitää tekoälyn välivaiheita. Aloitettu toteutusdokumentin luonnos ja suoritettu vertaisarviointi.
+
+**19.2.2016:** 7 tuntia
+
+* Koodia hiottu erityisesti Checkstyle- ja PIT-raporttien avulla. Ilmeisesti Checkstyle-raportti ilmoittaa jotakin virhettä, joka ei aiheudu koodista. Ainoa "sääntöjen rikkomus" on Array-luokan liiallinen pituus, mutta siinä luokassa valtaosa on koodin kommentointia, joten "virheeseen" ei puututtu. Yksikkötestejä myös tarkistettu. Laadittu uusi, kuvaavampi luokkakaavio sekä kaikille käyttötapauksille omat sekvenssikaaviot. Myös vertaisarviointi suoritettu. Aloitettu havainnoillistamaan simulaation toteutusta. Omat tietorakenteet vielä toteuttamatta, mutta projektin eteneminen näyttää vielä hyvältä vaikka loppu häämöttää.

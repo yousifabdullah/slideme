@@ -11,107 +11,107 @@ import static org.junit.Assert.*;
  */
 public class StateTest {
     
-    // State.moveTile()-metodin yksikkötestit.
+    // State.nextState()-metodin yksikkötestit.
     @Test
-    public void moveTileUpWhenPossible() {
+    public void nextStateUpWhenPossible() {
         State state1 = new State(new int[]{1, 2, 3, 4, 5, 6, 7, 8, 0});
-        State state2 = state1.moveTile("up");
+        State state2 = state1.nextState(0);
         
         assertTrue(Arrays.equals(new int[]{1, 2, 3, 4, 5, 0, 7, 8, 6}, state2.getCurrentIteration()));
     }
     
     @Test
-    public void moveTileDownWhenPossible() {
+    public void nextStateDownWhenPossible() {
         State state1 = new State(new int[]{1, 2, 0, 3, 4, 5, 6, 7, 8});
-        State state2 = state1.moveTile("down");
+        State state2 = state1.nextState(1);
         
         assertTrue(Arrays.equals(new int[]{1, 2, 5, 3, 4, 0, 6, 7, 8}, state2.getCurrentIteration()));
     }
     
     @Test
-    public void moveTileLeftWhenPossible() {
+    public void nextStateLeftWhenPossible() {
         State state1 = new State(new int[]{1, 2, 3, 4, 5, 6, 7, 0, 8});
-        State state2 = state1.moveTile("left");
+        State state2 = state1.nextState(2);
         
         assertTrue(Arrays.equals(new int[]{1, 2, 3, 4, 5, 6, 0, 7, 8}, state2.getCurrentIteration()));
     }
     
     @Test
-    public void moveTileRightWhenPossible() {
+    public void nextStateRightWhenPossible() {
         State state1 = new State(new int[]{1, 2, 3, 0, 4, 5, 6, 7, 8});
-        State state2 = state1.moveTile("right");
+        State state2 = state1.nextState(3);
         
         assertTrue(Arrays.equals(new int[]{1, 2, 3, 4, 0, 5, 6, 7, 8}, state2.getCurrentIteration()));
     }
     
     @Test
-    public void moveTileUpWhenImpossible() {
+    public void nextStateUpWhenImpossible() {
         State state1 = new State(new int[]{1, 2, 0, 3, 4, 5, 6, 7, 8});
-        State state2 = state1.moveTile("up");
+        State state2 = state1.nextState(0);
         
         assertEquals(null, state2);
     }
     
     @Test
-    public void moveTileDownWhenImpossible() {
+    public void nextStateDownWhenImpossible() {
         State state1 = new State(new int[]{1, 2, 3, 4, 5, 6, 7, 8, 0});
-        State state2 = state1.moveTile("down");
+        State state2 = state1.nextState(1);
         
         assertEquals(null, state2);
     }
     
     @Test
-    public void moveTileLeftWhenImpossible() {
+    public void nextStateLeftWhenImpossible() {
         State state1 = new State(new int[]{1, 2, 3, 0, 4, 5, 6, 7, 8});
-        State state2 = state1.moveTile("left");
+        State state2 = state1.nextState(2);
         
         assertEquals(null, state2);
     }
     
     @Test
-    public void moveTileRightWhenImpossible() {
+    public void nextStateRightWhenImpossible() {
         State state1 = new State(new int[]{1, 2, 0, 3, 4, 5, 6, 7, 8});
-        State state2 = state1.moveTile("right");
+        State state2 = state1.nextState(3);
         
         assertEquals(null, state2);
     }
     
     @Test
-    public void moveTileUpWithoutZero() {
+    public void nextStateUpWithoutZero() {
         State state1 = new State(new int[]{1, 2, 3, 4, 5, 6, 7, 8});
-        State state2 = state1.moveTile("up");
+        State state2 = state1.nextState(0);
         
         assertEquals(null, state2);
     }
     
     @Test
-    public void moveTileDownWithoutZero() {
+    public void nextStateDownWithoutZero() {
         State state1 = new State(new int[]{1, 2, 3, 4, 5, 6, 7, 8});
-        State state2 = state1.moveTile("down");
+        State state2 = state1.nextState(1);
         
         assertEquals(null, state2);
     }
     
     @Test
-    public void moveTileLeftWithoutZero() {
+    public void nextStateLeftWithoutZero() {
         State state1 = new State(new int[]{1, 2, 3, 4, 5, 6, 7, 8});
-        State state2 = state1.moveTile("left");
+        State state2 = state1.nextState(2);
         
         assertEquals(null, state2);
     }
     
     @Test
-    public void moveTileRightWithoutZero() {
+    public void nextStateRightWithoutZero() {
         State state1 = new State(new int[]{1, 2, 3, 4, 5, 6, 7, 8});
-        State state2 = state1.moveTile("right");
+        State state2 = state1.nextState(3);
         
         assertEquals(null, state2);
     }
     
     @Test
-    public void moveTileWithIllegalDirection() {
+    public void nextStateWithIllegalDirection() {
         State state1 = new State(new int[]{1, 2, 3, 4, 5, 6, 7, 8, 0});
-        State state2 = state1.moveTile("northwest");
+        State state2 = state1.nextState(-1);
         
         assertEquals(null, state2);
     }

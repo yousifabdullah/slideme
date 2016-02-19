@@ -6,10 +6,10 @@
 
 **Pelaajan toiminnot:**
 
-* Numeroidun ruudun siirto vapaaruudun tilalle
+* Numeroidun ruudun siirto vapaaruudun tilalle ([sekvenssikaavio](kayttotapaus1.png))
   * onnistuu, kun vapaaruutu on naapurina pysty- tai vaakatasolla
-* Ruutujen sekoitus uuden pelitilanteen luomiseksi
-* Simulaation käynnistys, jossa tekoäly ratkaisee pelitilanteen
+* Ruutujen sekoitus uuden pelitilanteen luomiseksi ([sekvenssikaavio](kayttotapaus2.png))
+* Simulaation käynnistys, jossa tekoäly ratkaisee pelitilanteen ([sekvenssikaavio](kayttotapaus3.png))
 
 **Tarkempi selvitys projektista:**
 
@@ -21,13 +21,9 @@
 
 * Peli toteutetaan graafisella käyttöliittymällä ja pelaaja voi hiirellä osoittaa ruutuja, siirtäen niitä aina vapaaruutuun yksi kerrallaan. Muut toiminnallisuudet ovat peliruutujen sekoitus uuden pelitilanteen luomiseksi, joka toteutetaan algoritmisesti, sekä simulaation käynnistys, jossa teköäly ratkaisee pelitilanteen.
 
-**Määrittelyvaiheen luokkakaavio:**
+**Luokkakaavio ohjelmakoodin perusteella:**
 
 ![Projektin pääluokat ovat: UI, Solver ja Board.](luokkakaavio.png)
-
-**Tarkempi luokkakaavio ohjelmakoodin perusteella:**
-
-![Luokkakaavioon erityisenä lisäyksenä tuli Array-apuluokka.](luokkakaavio2.png)
 
 **Konsepti graafiselle käyttöliittymälle:**
 

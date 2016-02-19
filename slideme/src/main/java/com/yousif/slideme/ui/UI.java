@@ -53,11 +53,11 @@ public class UI implements Runnable, ActionListener {
         Asetetaan käyttöliittymän ilmeeksi käytössä olevan käyttö-
         järjestelmän (esim. Windows / OS X / Linux) oletusilme.
         */
-        try {
+        setLookAndFeel: try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch (Exception exception) {
             // Huom. poikkeukseen ei reagoida, jos ilmettä ei voi muuttaa.
-            return;
+            break setLookAndFeel;
         }
         
         Container container = this.frame.getContentPane();
@@ -197,7 +197,12 @@ public class UI implements Runnable, ActionListener {
                 case "slideme":
                     // Käynnistetään tekoälyn simulaatio.
                     Solver solver = new Solver(this.board);
-                    solver.findPath();
+                    int[] path = solver.findPath();
+                    
+                    for (int i = 0; i < path.length; i++) {
+                        this.board.moveTile(path[i]);
+                        this.refreshTiles();
+                    }
                     
                     break;
                 case "shuffle":

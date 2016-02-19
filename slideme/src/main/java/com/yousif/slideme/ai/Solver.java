@@ -3,8 +3,6 @@ package com.yousif.slideme.ai;
 import com.yousif.slideme.core.Array;
 import com.yousif.slideme.core.Board;
 
-// HUOM! NÄMÄ KORVATAAN OMILLA TIETORAKENTEILLA SEURAAVASSA PÄIVITYKSESSÄ!
-import java.util.HashSet;
 import java.util.PriorityQueue;
 
 /**
@@ -16,18 +14,22 @@ public class Solver {
     
     // HUOM! NÄMÄ KORVATAAN OMILLA TIETORAKENTEILLA SEURAAVASSA PÄIVITYKSESSÄ!
     private final PriorityQueue <State> queue = new PriorityQueue<>(100, (State a, State b) -> a.priority() - b.priority());
-    private final HashSet <State> closed = new HashSet<>();
     
     private final Board board;
     
+    /**
+     * Alustaa tekoälyn nykyisen pelitilanteen mukaisesti.
+     * 
+     * @param board nykyinen pelitilanne Board-tietueena
+     */
     public Solver(Board board) {
         this.board = board;
     }
     
-    public void findPath() {
+    public int[] findPath() {
         
         queue.clear();
-        closed.clear();
+        boolean[] closed = new boolean[876543210];
         
         queue.add(new State(this.board.getCurrentState()));
         
@@ -36,24 +38,25 @@ public class Solver {
             State state = queue.poll();
             
             if (Array.matches(state.getCurrentIteration(), this.board.getFinalState())) {
-                tracePath(state);
-                
-                return;
+                return this.tracePath(state);
             }
             
-            closed.add(state);
+            closed[this.getReference(state)] = true;
             
-            addSuccessor(state.moveTile("up"));
-            addSuccessor(state.moveTile("down"));
-            addSuccessor(state.moveTile("left"));
-            addSuccessor(state.moveTile("right"));
+            for (int i = 0; i < 4; i++) {
+                State successor = state.nextState(i);
+                
+                if (successor != null && closed[this.getReference(successor)] == false) {
+                    queue.add(successor);
+                }
+            }
         }
+        
+        return null;
     }
     
-    private void addSuccessor(State successor) {
-        if (successor != null && !closed.contains(successor)) {
-            queue.add(successor);
-        }
+    int getReference(State state) {
+        return Array.asInteger(state.getCurrentIteration()) - 1;
     }
     
     /*
@@ -81,10 +84,20 @@ public class Solver {
         return heuristic;
     }
     
-    private void tracePath(State state) {
+    private int[] tracePath(State state) {
+        int[] path = new int[state.getDistance() + 1];
+        
+        // AIKAVAATIVUUS?
+        
+        /*int iteration = path.length - 1;
+        
         while (state != null) {
-            System.out.print(state.getIndexOfZero() + " ");
+            path[iteration] = state.getIndexOfZero();
+            iteration--;
+            
             state = state.getPreviousState();
-        }
+        }*/
+        
+        return path;
     }
 }

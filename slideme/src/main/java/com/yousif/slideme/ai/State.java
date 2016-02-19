@@ -10,23 +10,27 @@ import com.yousif.slideme.core.Array;
 public class State {
     
     /*
-    Alustetaan muistiin nykyinen iteraatio eli sen hetkinen pelitilanne
-    sekä tekoälyn välivaiheisiin tarvittavat muuttujat.
+    Alustetaan muistiin nykyinen iteraatio eli pelitilanne sekä tekoälyn
+    välivaiheisiin tarvittavat muuttujat.
     */
     private final int[] iteration;
     private final int indexOfZero;
     
-    // A*-algoritmia varten käytettävät g- ja h-arvot.
+    // Hakualgoritmia varten käytettävät g- ja h-arvot.
     private final int g;
     private final int h;
     
     // Pidetään yllä ketjua edellisistä pelitilanteista.
     private final State previous;
     
-    // Luodaan ketjulle lähtötilanne nykyisen pelitilanteen mukaisesti.
-    public State(int[] iteration) {
+    /**
+     * Luo ketjulle lähtötilanteen nykyisen pelitilanteen mukaisesti.
+     * 
+     * @param initial nykyinen pelitilanne int[]-taulukkona
+     */
+    public State(int[] initial) {
         // Luetaan muistiin nykyinen pelitilanne.
-        this.iteration = iteration;
+        this.iteration = initial;
         
         // Haetaan vapaaruudun sijainti ja kirjataan se ylös.
         this.indexOfZero = Array.indexOf(this.iteration, 0);
@@ -38,7 +42,12 @@ public class State {
         this.previous = null;
     }
     
-    // Luodaan seuraava iteraatio ketjussa edellisen perusteella.
+    /**
+     * Luo seuraavan iteraatio ketjussa edellisen perusteella.
+     * 
+     * @param previous edellinen iteraatio State-tietueena
+     * @param newIndex vapaaruudun indeksi uudessa iteraatiossa
+     */
     public State(State previous, int newIndex) {
         // Luetaan muistiin edellinen pelitilanne.
         this.iteration = Array.copy(previous.iteration);
@@ -47,7 +56,7 @@ public class State {
         Array.swap(this.iteration, previous.indexOfZero, newIndex);
         this.indexOfZero = newIndex;
         
-        // Korotetaan lähtöarvoa ja päivitetään heuristinen etäisyys.
+        // Korotetaan lähtöarvo ja päivitetään heuristinen etäisyys.
         this.g = previous.g + 1;
         this.h = Solver.heuristic(this.iteration);
         
@@ -82,8 +91,17 @@ public class State {
     }
     
     /**
+     * Palauttaa etäisyyden eli g-arvon nykyisessä iteraatiossa.
+     * 
+     * @return nykyisen iteraation g-arvo
+     */
+    int getDistance() {
+        return this.g;
+    }
+    
+    /**
      * Laskee nykyisen iteraation f-arvon etäisyyden (siis g-arvon) ja
-     * heuristisen funktion perusteella. A*-algoritmin käyttämä minimikeko
+     * heuristisen funktion perusteella. Hakualgoritmin käyttämä minimikeko
      * ylläpitää iteraatioiden järjestystä juuri f-arvoilla.
      * 
      * @return nykyisen iteraation f-arvo
@@ -91,42 +109,50 @@ public class State {
     int priority() {
         return this.g + this.h;
     }
+    
     /**
      * Siirtää vapaaruutua muuttamalla sen indeksiä ja samalla luo uuden
      * iteraation. Toisin kuin 8-peliä pelatessa, jossa pelaaja siirtää
      * aina muita peliruutuja vapaaruudun tilalle, siirtyy vapaaruutu
      * tekoälyssä. Tämän takia on tekoälyn kannalta edullista pitää kirjaa
-     * vapaaruudun sijainnista, jolloin riittää kasvattaa/vähentää sen
-     * indeksiä uuden iteraation luomiseksi.
+     * vapaaruudun sijainnista, jolloin riittää kasvattaa/pienentää indeksiä
+     * uuden iteraation luomiseksi. Toiminnon aikavaativuus on O(1).
+     * 
+     * Hyväksyttävät suunnat: 0 (ylös), 1 (alas), 2 (vasemmalle) ja
+     * 3 (oikealle).
      * 
      * @param direction suunta, johon vapaaruutu siirtyy seuraavaksi
      * @return uusi iteraatio State-tietueena
      */
-    State moveTile(String direction) {
+    State nextState(int direction) {
         /*
         Mikäli vapaaruutua ei annetussa iteraatiossa ole olemassakaan,
-        annetaan paluuarvona null.
+        annetaan paluuarvona null. Huom. tämän ei pitäisi koskaan tapahtua!
         */
         if (this.indexOfZero == -1) {
             return null;
         }
         
         switch (direction) {
-            case "up":
-                return this.indexOfZero > 2 ? new State(this, this.indexOfZero - 3) : null;
-            case "down":
-                return this.indexOfZero < 6 ? new State(this, this.indexOfZero + 3) : null;
-            case "left":
-                return this.indexOfZero % 3 > 0 ? new State(this, this.indexOfZero - 1) : null;
-            case "right":
-                return this.indexOfZero % 3 < 2 ? new State(this, this.indexOfZero + 1) : null;
+            case 0: // ylös
+                if (this.indexOfZero > 2) { return new State(this, this.indexOfZero - 3); }
+                break;
+            case 1: // alas
+                if (this.indexOfZero < 6) { return new State(this, this.indexOfZero + 3); }
+                break;
+            case 2: // vasemmalle
+                if (this.indexOfZero % 3 > 0) { return new State(this, this.indexOfZero - 1); }
+                break;
+            case 3: // oikealle
+                if (this.indexOfZero % 3 < 2) { return new State(this, this.indexOfZero + 1); }
+                break;
         }
         
         return null;
     }
     
     /**
-     * Aputoiminto HashSet-tietorakenteelle, joka vertailee iteraatioita
+     * Aputoiminto UniqueSet-tietorakenteelle, joka vertailee iteraatioita
      * keskenään ja palauttaa arvon true, mikäli annettu iteraatio on
      * identtinen nykyisen iteraation kanssa.
      * 
@@ -145,7 +171,7 @@ public class State {
     }
     
     /**
-     * Aputoiminto HashSet-tietorakenteelle, joka palauttaa nykyiselle
+     * Aputoiminto UniqueSet-tietorakenteelle, joka palauttaa nykyiselle
      * iteraatiolle oman hajautusarvon.
      * 
      * @return nykyisen iteraation hajautusarvo

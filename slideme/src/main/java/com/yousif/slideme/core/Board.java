@@ -7,15 +7,15 @@ package com.yousif.slideme.core;
  */
 public final class Board {
     
-    /*
-    Alustetaan muistiin nykyinen pelitilanne ja ratkaisu sekä kartta
-    hyväksyttävistä siirroista.
-    */
     private final int[] board;
     private final int[] solution;
     
     private final int[][] movesMap;
     
+    /**
+     * Alustaa muistiin nykyisen pelitilanteen ja ratkaisun sekä kartan
+     * hyväksyttävistä siirroista.
+     */
     public Board() {
         this.board = new int[] {1, 2, 3, 4, 5, 6, 7, 8, 0};
         this.solution = Array.copy(this.board);
