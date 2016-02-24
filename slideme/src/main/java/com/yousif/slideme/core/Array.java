@@ -8,10 +8,10 @@ package com.yousif.slideme.core;
 public class Array {
     
     /**
-     * Sekoittaa taulukon alkiot satunnaiseen järjestykseen käyttäen
+     * Sekoittaa annetun taulukon alkiot satunnaiseen järjestykseen käyttäen
      * Durstenfeldin algoritmia, joka on modernimpi vedos Fisher-Yates
-     * -algoritmista. Taulukon alkiot käydään kerran läpi, eli aika-
-     * vaativuus on O(n).
+     * -algoritmista. Taulukon alkiot käydään kerran läpi, eli aikavaativuus
+     * on O(n).
      * 
      * Todellinen aikavaativuus tässä tapauksessa on kuitenkin O(n^2),
      * koska sekoituksen lisäksi lasketaan inversioiden määrä taulukossa.
@@ -51,7 +51,7 @@ public class Array {
     }
     
     /**
-     * Laskee taulukossa esiintyvien inversioiden määrän käyttäen
+     * Laskee annetussa taulukossa esiintyvien inversioiden määrän käyttäen
      * bubble sort -algoritmia. Tässä algoritmissa hyödynnetään tieto
      * siitä, että bubble sort käyttää aina vähimmän mahdollisen määrän
      * vierekkäisten alkioiden vaihtoja taulukkoa järjestäessään.
@@ -102,8 +102,8 @@ public class Array {
     
     /**
      * Aputoiminto shuffleWithEvenInversions()-metodille, joka korjaa
-     * taulukon alkioiden järjestyksen etsimällä ensimmäisen inversion
-     * muodostavan indeksiparin ja vaihtaa alkiot keskenään.
+     * annetun taulukon alkioiden järjestyksen etsimällä ensimmäisen
+     * inversion muodostavan indeksiparin ja vaihtaa alkiot keskenään.
      * 
      * Siis inversioiden määrä vähenee yhdellä, mikä on toivottua, kun
      * inversioita on aluksi pariton määrä. Tällöin päädytään järjestykseen,

@@ -18,6 +18,6 @@ public class Main {
      * @param args komentorivillä annettu syöte (ei käytössä)
      */
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(new UI(new Board()));
+        SwingUtilities.invokeLater(new UI(new Board(), "slideme v1.1"));
     }
 }

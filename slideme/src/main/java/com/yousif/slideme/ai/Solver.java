@@ -2,8 +2,8 @@ package com.yousif.slideme.ai;
 
 import com.yousif.slideme.core.Array;
 import com.yousif.slideme.core.Board;
-
-import java.util.PriorityQueue;
+import com.yousif.slideme.struc.MinHeap;
+import com.yousif.slideme.struc.UniqueSet;
 
 /**
  * Tekoälyn toiminnallisuuden määrittävä luokka.
@@ -12,8 +12,8 @@ import java.util.PriorityQueue;
  */
 public class Solver {
     
-    // HUOM! NÄMÄ KORVATAAN OMILLA TIETORAKENTEILLA SEURAAVASSA PÄIVITYKSESSÄ!
-    private final PriorityQueue <State> queue = new PriorityQueue<>(100, (State a, State b) -> a.priority() - b.priority());
+    private final UniqueSet closed;
+    private final MinHeap<State> queue;
     
     private final Board board;
     
@@ -24,12 +24,13 @@ public class Solver {
      */
     public Solver(Board board) {
         this.board = board;
+        this.closed = new UniqueSet();
+        this.queue = new MinHeap<>();
     }
     
     public int[] findPath() {
         
         queue.clear();
-        boolean[] closed = new boolean[876543210];
         
         queue.add(new State(this.board.getCurrentState()));
         
@@ -37,16 +38,16 @@ public class Solver {
             
             State state = queue.poll();
             
-            if (Array.matches(state.getCurrentIteration(), this.board.getFinalState())) {
+            if (Array.matches(state.getCurrentIteration(), this.board.getSolution())) {
                 return this.tracePath(state);
             }
             
-            closed[this.getReference(state)] = true;
+            closed.strike(this.getReference(state));
             
             for (int i = 0; i < 4; i++) {
                 State successor = state.nextState(i);
                 
-                if (successor != null && closed[this.getReference(successor)] == false) {
+                if (successor != null && closed.check(this.getReference(successor)) == false) {
                     queue.add(successor);
                 }
             }
@@ -56,7 +57,7 @@ public class Solver {
     }
     
     int getReference(State state) {
-        return Array.asInteger(state.getCurrentIteration()) - 1;
+        return Array.asInteger(state.getCurrentIteration());
     }
     
     /*
@@ -89,14 +90,14 @@ public class Solver {
         
         // AIKAVAATIVUUS?
         
-        /*int iteration = path.length - 1;
+        int iteration = path.length - 1;
         
         while (state != null) {
             path[iteration] = state.getIndexOfZero();
             iteration--;
             
             state = state.getPreviousState();
-        }*/
+        }
         
         return path;
     }

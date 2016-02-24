@@ -7,24 +7,19 @@ import com.yousif.slideme.core.Array;
  * 
  * @author Yousif Abdullah <yousif.abdullah@helsinki.fi>
  */
-public class State {
+public class State implements Comparable<State> {
     
-    /*
-    Alustetaan muistiin nykyinen iteraatio eli pelitilanne sekä tekoälyn
-    välivaiheisiin tarvittavat muuttujat.
-    */
     private final int[] iteration;
     private final int indexOfZero;
     
-    // Hakualgoritmia varten käytettävät g- ja h-arvot.
-    private final int g;
-    private final int h;
+    private final int distance;
+    private final int heuristic;
     
-    // Pidetään yllä ketjua edellisistä pelitilanteista.
     private final State previous;
     
     /**
-     * Luo ketjulle lähtötilanteen nykyisen pelitilanteen mukaisesti.
+     * Luo ketjulle lähtötilanteen nykyisen pelitilanteen mukaisesti ja
+     * alustaa muistiin nykyisen iteraation eli pelitilanteen.
      * 
      * @param initial nykyinen pelitilanne int[]-taulukkona
      */
@@ -36,14 +31,15 @@ public class State {
         this.indexOfZero = Array.indexOf(this.iteration, 0);
         
         // Asetetaan lähtöarvo ja päivitetään heuristinen etäisyys.
-        this.g = 0;
-        this.h = Solver.heuristic(this.iteration);
+        this.distance = 0;
+        this.heuristic = Solver.heuristic(this.iteration);
         
+        // Pidetään yllä ketjua edellisistä pelitilanteista.
         this.previous = null;
     }
     
     /**
-     * Luo seuraavan iteraatio ketjussa edellisen perusteella.
+     * Luo seuraavan iteraation ketjussa edellisen perusteella.
      * 
      * @param previous edellinen iteraatio State-tietueena
      * @param newIndex vapaaruudun indeksi uudessa iteraatiossa
@@ -56,10 +52,11 @@ public class State {
         Array.swap(this.iteration, previous.indexOfZero, newIndex);
         this.indexOfZero = newIndex;
         
-        // Korotetaan lähtöarvo ja päivitetään heuristinen etäisyys.
-        this.g = previous.g + 1;
-        this.h = Solver.heuristic(this.iteration);
+        // Korotetaan lähtöarvoa ja päivitetään heuristinen etäisyys.
+        this.distance = previous.distance + 1;
+        this.heuristic = Solver.heuristic(this.iteration);
         
+        // Yhdistetään edellinen iteraatio nykyiseen ketjussa.
         this.previous = previous;
     }
     
@@ -91,23 +88,12 @@ public class State {
     }
     
     /**
-     * Palauttaa etäisyyden eli g-arvon nykyisessä iteraatiossa.
+     * Palauttaa etäisyyden lähtötilanteesta nykyisessä iteraatiossa.
      * 
-     * @return nykyisen iteraation g-arvo
+     * @return nykyisen iteraation etäisyys lähtötilanteesta
      */
     int getDistance() {
-        return this.g;
-    }
-    
-    /**
-     * Laskee nykyisen iteraation f-arvon etäisyyden (siis g-arvon) ja
-     * heuristisen funktion perusteella. Hakualgoritmin käyttämä minimikeko
-     * ylläpitää iteraatioiden järjestystä juuri f-arvoilla.
-     * 
-     * @return nykyisen iteraation f-arvo
-     */
-    int priority() {
-        return this.g + this.h;
+        return this.distance;
     }
     
     /**
@@ -127,7 +113,7 @@ public class State {
     State nextState(int direction) {
         /*
         Mikäli vapaaruutua ei annetussa iteraatiossa ole olemassakaan,
-        annetaan paluuarvona null. Huom. tämän ei pitäisi koskaan tapahtua!
+        annetaan paluuarvona null.
         */
         if (this.indexOfZero == -1) {
             return null;
@@ -152,32 +138,16 @@ public class State {
     }
     
     /**
-     * Aputoiminto UniqueSet-tietorakenteelle, joka vertailee iteraatioita
-     * keskenään ja palauttaa arvon true, mikäli annettu iteraatio on
-     * identtinen nykyisen iteraation kanssa.
+     * Laskee nykyisen iteraation prioriteetin etäisyyden ja heuristisen
+     * funktion perusteella. Hakualgoritmin käyttämä minimikeko ylläpitää
+     * iteraatioiden järjestystä prioriteetin avulla. Toiminnon aika-
+     * vaativuus on O(1).
      * 
-     * @param object iteraatio Object-tietueena
-     * @return true, kun iteraatiot ovat identtiset ja muutoin false
+     * @param other vertailtava iteraatio State-tietueena
+     * @return nykyisen iteraation prioriteetti
      */
     @Override
-    public boolean equals(Object object) {
-        if (object instanceof State) {
-            State other = (State) object;
-            
-            return Array.matches(this.iteration, other.iteration);
-        }
-        
-        return false;
-    }
-    
-    /**
-     * Aputoiminto UniqueSet-tietorakenteelle, joka palauttaa nykyiselle
-     * iteraatiolle oman hajautusarvon.
-     * 
-     * @return nykyisen iteraation hajautusarvo
-     */
-    @Override
-    public int hashCode() {
-        return Array.asInteger(this.iteration);
+    public int compareTo(State other) {
+        return (this.distance + this.heuristic) - (other.distance + other.heuristic);
     }
 }

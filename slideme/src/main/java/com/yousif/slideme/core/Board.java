@@ -9,7 +9,8 @@ public final class Board {
     
     private final int[] board;
     private final int[] solution;
-    
+
+    private int moves;
     private final int[][] movesMap;
     
     /**
@@ -19,6 +20,9 @@ public final class Board {
     public Board() {
         this.board = new int[] {1, 2, 3, 4, 5, 6, 7, 8, 0};
         this.solution = Array.copy(this.board);
+        
+        // Ylläpidetään tehtyjen siirtojen lukumäärää.
+        this.moves = 0;
         
         /*
         Hyväksyttävät siirrot ovat oikeastaan suuntia, joihin jokaisesta
@@ -72,16 +76,26 @@ public final class Board {
      * 
      * @return ratkaistu pelitilanne int[]-taulukkona
      */
-    public int[] getFinalState() {
+    public int[] getSolution() {
         return this.solution;
     }
     
     /**
+     * Palauttaa tehtyjen siirtojen lukumäärän.
+     * 
+     * @return siirtojen lukumäärä
+     */
+    public int getMovesCount() {
+        return this.moves;
+    }
+    
+    /**
      * Luo uuden pelitilanteen sekoittamalla nykyisen järjestyksen
-     * satunnaiseksi.
+     * satunnaiseksi ja nollaamalla siirtojen lukumääärän.
      */
     public void shuffleOrder() {
         Array.shuffleWithEvenInversions(this.board);
+        this.moves = 0;
     }
     
     /**
@@ -111,10 +125,12 @@ public final class Board {
                     /*
                     Mikäli siirrettävästä peliruudusta on mahdollista
                     siirtyä vapaaruutuun, vaihdetaan kyseisten peliruutujen
-                    paikat keskenään.
+                    paikat keskenään ja kasvatetaan siirtojen lukumäärää.
                     */
                     if (this.board[to] == 0) {
                         Array.swap(this.board, from, to);
+                        this.moves++;
+                        
                         return true;
                     }
                 }

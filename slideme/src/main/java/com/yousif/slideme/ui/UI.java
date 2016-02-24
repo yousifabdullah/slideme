@@ -26,15 +26,20 @@ import javax.swing.border.EmptyBorder;
  */
 public class UI implements Runnable, ActionListener {
     
-    // Alustetaan muistiin käyttöliittymän ikkuna ja pelitilanne.
     private JFrame frame;
     private final String appName;
     
     private final Board board;
     private final JButton[] tiles;
     
-    public UI(Board board) {
-        this.appName = "slideme v1.01";
+    /**
+     * Alustaa käyttöliittymän uudella pelitilanteella.
+     * 
+     * @param board uusi pelitilanne Board-tietueena
+     * @param appName sovelluksen nimi käyttöliittymässä
+     */
+    public UI(Board board, String appName) {
+        this.appName = appName;
         
         this.board = board;
         this.tiles = new JButton[9];
@@ -162,10 +167,34 @@ public class UI implements Runnable, ActionListener {
         }
         
         // Päivityksen yhteydessä tarkistetaan, onko peli ratkaistu.
-        if (Array.matches(this.board.getCurrentState(), this.board.getFinalState())) {
+        if (Array.matches(this.board.getCurrentState(), this.board.getSolution())) {
             JOptionPane.showMessageDialog(this.frame,
-                    "Mahtavaa, peliruudut ovat taas järjestyksessä!",
+                    "Mahtavaa, peliruudut ovat taas järjestyksessä!\n"
+                            + "(Siirtoja: " + this.board.getMovesCount() + ")",
                     this.appName, JOptionPane.INFORMATION_MESSAGE);
+        }
+    }
+    
+    /**
+     * Luo uuden pelitilanteen sekoittamalla peliruudut satunnaiseen
+     * järjestykseen ja päivittää peliruudut käyttöliittymässä.
+     */
+    void shuffleTiles() {
+        this.board.shuffleOrder();
+        this.refreshTiles();
+    }
+    
+    /**
+     * Siirtää annetun indeksin kohdalla sijaitsevan peliruudun vapaaruudun
+     * tilalle, mikäli se on mahdollista ja päivittää peliruudut käyttö-
+     * liittymässä.
+     * 
+     * @param from siirrettävän peliruudun indeksi
+     * @return true, kun siirto on onnistunut ja muutoin false
+     */
+    void moveTile(int from) {
+        if (this.board.moveTile(from)) {
+            this.refreshTiles();
         }
     }
     
@@ -187,11 +216,7 @@ public class UI implements Runnable, ActionListener {
         */
         try {
             int from = Integer.parseInt(action);
-            
-            if (this.board.moveTile(from)) {
-                // Onnistuneen siirron jälkeen peliruudut aina päivitetään.
-                this.refreshTiles();
-            }
+            this.moveTile(from);
         } catch (NumberFormatException exception) {
             switch (action) {
                 case "slideme":
@@ -207,8 +232,7 @@ public class UI implements Runnable, ActionListener {
                     break;
                 case "shuffle":
                     // Luodaan uusi pelitilanne sekoittamalla peliruudut.
-                    this.board.shuffleOrder();
-                    this.refreshTiles();
+                    this.shuffleTiles();
                     
                     break;
             }

@@ -35,3 +35,9 @@
 **19.2.2016:** 7 tuntia
 
 * Koodia hiottu erityisesti Checkstyle- ja PIT-raporttien avulla. Ilmeisesti Checkstyle-raportti ilmoittaa jotakin virhettä, joka ei aiheudu koodista. Ainoa "sääntöjen rikkomus" on Array-luokan liiallinen pituus, mutta siinä luokassa valtaosa on koodin kommentointia, joten "virheeseen" ei puututtu. Yksikkötestejä myös tarkistettu. Laadittu uusi, kuvaavampi luokkakaavio sekä kaikille käyttötapauksille omat sekvenssikaaviot. Myös vertaisarviointi suoritettu. Aloitettu havainnoillistamaan simulaation toteutusta. Omat tietorakenteet vielä toteuttamatta, mutta projektin eteneminen näyttää vielä hyvältä vaikka loppu häämöttää.
+
+**23.2.2016:** 11 tuntia
+
+**24.2.2016:** 4 tuntia
+
+* *Tiralabra:* Omat tietorakenteet ovat toteutettu! Projekti lähenee valmistumista hyvin ja on arviolta 95% valmis. Yksikkötestejä laadittu lisää tekoälyn toiminnallisuudelle sekä nykyistä koodia hiottu ja JavaDocia lisätty tarpeen mukaisesti. Suorituskykytestausta aloitettu ja tuloksia tutkittu, mutta tuloksista ei vielä ole johtopäätöksiin päädytty.
