@@ -221,13 +221,7 @@ public class UI implements Runnable, ActionListener {
             switch (action) {
                 case "slideme":
                     // Käynnistetään tekoälyn simulaatio.
-                    Solver solver = new Solver(this.board);
-                    int[] path = solver.findPath();
-                    
-                    for (int i = 0; i < path.length; i++) {
-                        this.board.moveTile(path[i]);
-                        this.refreshTiles();
-                    }
+                    new Simulation(this, this.board).run();
                     
                     break;
                 case "shuffle":
