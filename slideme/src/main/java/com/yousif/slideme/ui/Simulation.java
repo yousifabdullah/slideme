@@ -1,16 +1,18 @@
 package com.yousif.slideme.ui;
 
 import com.yousif.slideme.ai.Solver;
-import com.yousif.slideme.core.Board;
 
 import java.util.Timer;
 import java.util.TimerTask;
 
+/**
+ * Tekoälyn simulaation määrittävä luokka.
+ * 
+ * @author Yousif Abdullah <yousif.abdullah@helsinki.fi>
+ */
 public class Simulation extends TimerTask {
     
     private final UI ui;
-    private final Board board;
-    
     private final Timer timer;
     
     private int[] path;
@@ -18,10 +20,14 @@ public class Simulation extends TimerTask {
     
     private boolean running;
     
-    public Simulation(UI ui, Board board) {
+    /**
+     * Alustaa simulaatiota varten tarvittavan käyttöliittymän viitteen
+     * sekä Timer-olion, joka simuloi välivaiheet.
+     * 
+     * @param ui käsiteltävä käyttöliittymä UI-tietueena
+     */
+    public Simulation(UI ui) {
         this.ui = ui;
-        this.board = board;
-        
         this.timer = new Timer();
         
         this.path = new int[0];
@@ -30,26 +36,43 @@ public class Simulation extends TimerTask {
         this.running = false;
     }
     
+    /**
+     * Käynnistää tekoälyn simulaation.
+     */
     @Override
     public void run() {
+        /*
+        Mikäli simulaatio ei ole vielä käynnissä, alustetaan hakualgoritmi
+        eli tekoäly ja käynnistetään Timer-olio.
+        */
         if (this.running == false) {
             this.running = true;
             
-            Solver solver = new Solver(this.board);
+            /*
+            Alustetaan tekoäly käyttöliittymän käyttämän Board-tietueen
+            avulla.
+            */
+            Solver solver = new Solver(this.ui.getBoardInstance());
             this.path = solver.findPath();
             
+            // Määritetään Timer-olio simuloimaan välivaiheet 0,5s välein.
             this.timer.schedule(this, 0, 500);
-            return;
-        }
-        
-        if (this.step != this.path.length) {
-            System.out.println(this.step + ". askel");
-            this.ui.moveTile(this.path[this.step]);
-            this.step++;
         } else {
-            System.out.println("loppu");
-            timer.cancel();
-            timer.purge();
+            /*
+            Simuloidaan yksi askel kerrallaan käyttöliittymässä, kunnes
+            päädytään viimeiseen välivaiheeseen eli ratkaisuun.
+            */
+            if (this.step < this.path.length) {
+                this.ui.moveTile(this.path[this.step]);
+                this.step++;
+            } else {
+                /*
+                Mikäli viimeinen välivaihe on simuloitu, puretaan muistista
+                Timer-olio ja perutaan mahdolliset jonossa olevat kutsut.
+                */
+                timer.cancel();
+                timer.purge();
+            }
         }
     }
 }

@@ -70,30 +70,13 @@ public class State implements Comparable<State> {
     }
     
     /**
-     * Palauttaa edellisen iteraation State-tietueena.
+     * Esittää nykyisen iteraation kokonaislukuna, joka vastaa iteraatiossa
+     * esiintyviä alkioita numeerisesti.
      * 
-     * @return edellinen iteraatio State-tietueena
+     * @return nykyisen iteraation esitys kokonaislukuna
      */
-    State getPreviousState() {
-        return this.previous;
-    }
-    
-    /**
-     * Palauttaa vapaaruudun sijainnin eli indeksin nykyisessä iteraatiossa.
-     * 
-     * @return vapaaruudun indeksi nykyisessä iteraatiossa
-     */
-    int getIndexOfZero() {
-        return this.indexOfZero;
-    }
-    
-    /**
-     * Palauttaa etäisyyden lähtötilanteesta nykyisessä iteraatiossa.
-     * 
-     * @return nykyisen iteraation etäisyys lähtötilanteesta
-     */
-    int getDistance() {
-        return this.distance;
+    int getCurrentAsInteger() {
+        return Array.asInteger(this.iteration);
     }
     
     /**
@@ -110,7 +93,7 @@ public class State implements Comparable<State> {
      * @param direction suunta, johon vapaaruutu siirtyy seuraavaksi
      * @return uusi iteraatio State-tietueena
      */
-    State nextState(int direction) {
+    State getNextState(int direction) {
         /*
         Mikäli vapaaruutua ei annetussa iteraatiossa ole olemassakaan,
         annetaan paluuarvona null.
@@ -135,6 +118,33 @@ public class State implements Comparable<State> {
         }
         
         return null;
+    }
+    
+    /**
+     * Palauttaa edellisen iteraation State-tietueena.
+     * 
+     * @return edellinen iteraatio State-tietueena
+     */
+    State getPreviousState() {
+        return this.previous;
+    }
+    
+    /**
+     * Palauttaa vapaaruudun sijainnin eli indeksin nykyisessä iteraatiossa.
+     * 
+     * @return vapaaruudun indeksi nykyisessä iteraatiossa
+     */
+    int getIndexOfZero() {
+        return this.indexOfZero;
+    }
+    
+    /**
+     * Palauttaa etäisyyden lähtötilanteesta nykyisessä iteraatiossa.
+     * 
+     * @return nykyisen iteraation etäisyys lähtötilanteesta
+     */
+    int getDistance() {
+        return this.distance;
     }
     
     /**

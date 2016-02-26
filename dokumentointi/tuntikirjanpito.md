@@ -41,3 +41,7 @@
 **24.2.2016:** 4 tuntia
 
 * *Tiralabra:* Omat tietorakenteet ovat toteutettu! Projekti lähenee valmistumista hyvin ja on arviolta 95% valmis. Yksikkötestejä laadittu lisää tekoälyn toiminnallisuudelle sekä nykyistä koodia hiottu ja JavaDocia lisätty tarpeen mukaisesti. Suorituskykytestausta aloitettu ja tuloksia tutkittu, mutta tuloksista ei vielä ole johtopäätöksiin päädytty.
+
+**26.2.2016:** 4 tuntia
+
+* Simulaatio toteutettu. Niin koodia kuin sen kommentointia on hiottu erityisesti Checkstyle- ja PIT-rapottien avulla. Checkstyle-raportissa näkyi tällä kertaa edellisen "sääntöjen rikkomuksen" eli suuren JavaDoc-määrän lisäksi virhe "ClassTypeParameterName", joka on kuitenkin itsessään virheellinen ilmaus. Tarkistin kyseisen rivin koodissani ja se on täysin validi sekä ainoa tapa saada haluamani toiminnallisuus. Laadittu myös rakennekuvaus aihemäärittelyn jatkoksi sekä erillinen käyttöohje.

@@ -24,74 +24,86 @@ public class Solver {
      */
     public Solver(Board board) {
         this.board = board;
+        
         this.closed = new UniqueSet();
         this.queue = new MinHeap<>();
     }
     
+    /**
+     * Suorittaa hakualgoritmin ja palauttaa polun välivaiheista nykyisestä
+     * pelitilanteesta ratkaisuun. Haku toteuttaa A*-algoritmin tai vaihto-
+     * ehtoisesti heuristiikasta riippuen BFS-algoritmin. Seuraavan läpi-
+     * käytävän iteraation priorisointi tapahtuu minimikeon avulla ja jo
+     * käydyt iteraatiot aina yliviivataan, jottei algoritmi tee ylimääräistä
+     * työtä.
+     * 
+     * Hakualgoritmin aikavaativuus pahimmassa tapauksessa on O(|E| + |V|).
+     * 
+     * @return välivaiheiden polku lähtötilanteesta ratkaisuun
+     */
     public int[] findPath() {
         
+        // Alustetaan minimikeko ja lisätään nykyinen iteraatio juureen.
         queue.clear();
-        
         queue.add(new State(this.board.getCurrentState()));
         
+        /*
+        Suoritetaan haku niin kauan, kunnes minimikeossa ei enää ole
+        läpikäytäviä iteraatioita.
+        */
         while (!queue.isEmpty()) {
             
+            // Luetaan minimikeosta iteraatio, jonka prioriteetti on pienin.
             State state = queue.poll();
             
+            // Jos iteraatio vastaa ratkaisua, loppuu algoritmin toiminta heti.
             if (Array.matches(state.getCurrentIteration(), this.board.getSolution())) {
                 return this.tracePath(state);
             }
             
-            closed.strike(this.getReference(state));
+            // Merkataan eli yliviivataan tarkasteltava iteraatio käsitellyksi.
+            closed.strike(state.getCurrentAsInteger());
             
+            /*
+            Lisätään minimikekoon enimmillään neljä uutta iteraatiota vapaa-
+            ruudun sijoittelun mukaisesti eli ylös, alas, vasemmalle ja
+            oikealle.
+            */
             for (int i = 0; i < 4; i++) {
-                State successor = state.nextState(i);
+                State successor = state.getNextState(i);
                 
-                if (successor != null && closed.check(this.getReference(successor)) == false) {
+                /*
+                Huom. aluksi tarkistetaan, että iteraatio ei ole tyhjä tai
+                yliviivattu.
+                */
+                if (successor != null && !closed.check(successor.getCurrentAsInteger())) {
                     queue.add(successor);
                 }
             }
         }
         
-        return null;
+        // Mikäli polkua ei löydy, palautetaan tyhjä taulukko.
+        return new int[0];
     }
     
-    int getReference(State state) {
-        return Array.asInteger(state.getCurrentIteration());
-    }
-    
-    /*
-    Lasketaan Manhattan-etäisyys indeksien a ja b välillä oleville
-    peliruuduille.
-    */
-    static int manhattanDistance(int a, int b) {
-        return Math.abs(a / 3 - b / 3) + Math.abs(a % 3 - b % 3);
-    }
-    
-    /*
-    A*-algoritmin heuristiikkana käytetään maksimia kaikkien peliruutujen
-    Manhattan-etäisyydestä.
-    */
-    static int heuristic(int[] tiles) {
-        int heuristic = 0;
-        
-        for (int i = 0; i < tiles.length; i++) {
-            // Huom. 0 merkitsee vapaaruutua, ei lukua 0!
-            if (tiles[i] != 0) {
-                heuristic = Math.max(heuristic, manhattanDistance(i, tiles[i]));
-            }
-        }
-        
-        return heuristic;
-    }
-    
+    /**
+     * Käy läpi hakualgoritmin toteuttaman polun ja palauttaa sen käänteisessä
+     * järjestyksessä. Koska hakualgoritmin toiminta päätyy löytäessään
+     * ratkaisun, on ketjun järjestys käytävä läpi käänteisesti, jotta väli-
+     * vaiheet voi simuloida lähtötilanteesta ratkaisuun.
+     * 
+     * @param state iteraatio, joka vastaa ratkaisua
+     * @return hakualgoritmin polku käänteisessä järjestyksessä
+     */
     private int[] tracePath(State state) {
+        // Alustetaan muistiin taulukko välivaiheiden polulle
         int[] path = new int[state.getDistance() + 1];
-        
-        // AIKAVAATIVUUS?
-        
         int iteration = path.length - 1;
         
+        /*
+        Mikäli lähtötilanteeseen ei ole vielä päädytty, kirjataan ylös
+        välivaihe ja peruutetaan yksi askel ketjussa.
+        */
         while (state != null) {
             path[iteration] = state.getIndexOfZero();
             iteration--;
@@ -100,5 +112,37 @@ public class Solver {
         }
         
         return path;
+    }
+    
+    /**
+     * Hakualgoritmin heuristinen funktio, joka palauttaa maksimin kaikkien
+     * peliruutujen Manhattan-etäisyydestä.
+     * 
+     * @param iteration iteraatio peliruuduista int[]-taulukkona
+     * @return annetun iteraation heuristinen arvo
+     */
+    static int heuristic(int[] iteration) {
+        int heuristic = 0;
+        
+        for (int i = 0; i < iteration.length; i++) {
+            // Huom. 0 merkitsee vapaaruutua, ei lukua 0!
+            if (iteration[i] != 0) {
+                heuristic = Math.max(heuristic, manhattanDistance(i, iteration[i]));
+            }
+        }
+        
+        return heuristic;
+    }
+    
+    /**
+     * Aputoiminto heuristiselle funktiolle, joka laskee Manhattan-etäisyyden
+     * annettujen indeksien välillä oleville peliruuduille.
+     * 
+     * @param a ensimmäinen tarkasteltava indeksi
+     * @param b toinen tarkasteltava indeksi
+     * @return Manhattan-etäisyys indeksien välillä oleville peliruuduille
+     */
+    static int manhattanDistance(int a, int b) {
+        return Math.abs(a / 3 - b / 3) + Math.abs(a % 3 - b % 3);
     }
 }

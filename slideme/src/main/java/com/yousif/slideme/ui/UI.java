@@ -1,6 +1,5 @@
 package com.yousif.slideme.ui;
 
-import com.yousif.slideme.ai.Solver;
 import com.yousif.slideme.core.Array;
 import com.yousif.slideme.core.Board;
 
@@ -199,6 +198,15 @@ public class UI implements Runnable, ActionListener {
     }
     
     /**
+     * Palauttaa käyttöliittymän käyttämän Board-tietueen.
+     * 
+     * @return nykyinen Board-tietue
+     */
+    Board getBoardInstance() {
+        return this.board;
+    }
+    
+    /**
      * Käsittelee tapahtumat (eli hiiren osoitukset) tapahtumakomentojen
      * avulla.
      * 
@@ -221,7 +229,7 @@ public class UI implements Runnable, ActionListener {
             switch (action) {
                 case "slideme":
                     // Käynnistetään tekoälyn simulaatio.
-                    new Simulation(this, this.board).run();
+                    new Simulation(this).run();
                     
                     break;
                 case "shuffle":

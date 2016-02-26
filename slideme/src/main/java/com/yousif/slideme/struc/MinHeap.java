@@ -4,7 +4,7 @@ package com.yousif.slideme.struc;
  * Oma toteutus minimikeosta, joka korvaa PriorityQueue-tietorakenteen.
  * 
  * @author Yousif Abdullah <yousif.abdullah@helsinki.fi>
- * @param <State> State-tiet
+ * @param <State> State-tietueet vertailtavina solmuina
  */
 public final class MinHeap<State extends Comparable<State>> {
     
@@ -12,14 +12,14 @@ public final class MinHeap<State extends Comparable<State>> {
     private int size;
     
     /**
-     * Alustetaan minimikeko
+     * Alustaa minimikeon tyhjällä taulukolla.
      */
     public MinHeap() {
-        clear();
+        this.clear();
     }
     
     /**
-     * Tyhjentää minimikeon siis luo uuden
+     * Luo uuden minimikeon tyhjällä taulukolla.
      */
     public void clear() {
         this.heap = (State[]) new Comparable[2];
@@ -27,100 +27,105 @@ public final class MinHeap<State extends Comparable<State>> {
     }
     
     /**
-     * Rakentaa keon
-     */
-    private void buildHeap() {
-        for (int k = this.size / 2; k > 0; k--) {
-            percolatingDown(k);
-        }
-    }
-    
-    /**
-     * "heapify" alaspäin
+     * Tarkistaa, onko minimikeko tyhjä.
      * 
-     * @param k 
-     */
-    private void percolatingDown(int k) {
-        State tmp = this.heap[k];
-        int child;
-        
-        while(2*k <= this.size) {
-            child = 2*k;
-            
-            if (child != this.size && this.heap[child].compareTo(this.heap[child + 1]) > 0) {
-                child++;
-            }
-            
-            if (tmp.compareTo(this.heap[child]) > 0) {
-                this.heap[k] = this.heap[child];
-            } else {
-                break;
-            }
-            
-            k = child;
-        }
-        
-        this.heap[k] = tmp;
-    }
-    
-    /**
-     * Tarkistaa onko keko tyhjä
-     * 
-     * @return 
+     * @return true, kun minimikeko on tyhjä ja muutoin false
      */
     public boolean isEmpty() {
         return (this.size == 0);
     }
     
     /**
-     * Poistaa sekä palauttaa pienimmän arvon keossa (delmin)
+     * Rakentaa minimikeon kekoehtoa noudattaen.
+     */
+    private void buildHeap() {
+        for (int i = this.size / 2; i > 0; i--) {
+            percolatingDown(i);
+        }
+    }
+    
+    /**
+     * Suorittaa "heapify"-toiminnon kekoehdon täyttämiseksi annetusta
+     * solmusta alaspäin.
      * 
-     * @return 
+     * @param index käsiteltävän solmun indeksi minimikeon taulukossa
+     */
+    private void percolatingDown(int index) {
+        State current = this.heap[index];
+        int child;
+        
+        while (2 * index <= this.size) {
+            child = 2 * index;
+            
+            if (child != this.size && this.heap[child].compareTo(this.heap[child + 1]) > 0) {
+                child++;
+            }
+            
+            if (current.compareTo(this.heap[child]) > 0) {
+                this.heap[index] = this.heap[child];
+            } else {
+                break;
+            }
+            
+            index = child;
+        }
+        
+        this.heap[index] = current;
+    }
+    
+    /**
+     * Poistaa sekä palauttaa pienimmän prioriteetin solmun minimikeossa.
+     * 
+     * @return pienimmän prioriteetin State-tietue
      */
     public State poll() {
         if (this.size != 0) {
-            State min = this.heap[1];
+            State state = this.heap[1];
+            
             this.heap[1] = this.heap[this.size];
             this.size--;
-            percolatingDown(1);
             
-            return min;
+            percolatingDown(1);
+            return state;
         }
         
+        // Mikäli minimikeko on tyhjä, palautetaan null.
         return null;
     }
     
     /**
-     * Lisää iteraation kekoon
+     * Lisää annetun iteraation minimikekoon sen prioriteetin perusteella.
      * 
-     * @param x 
+     * @param state lisättävä State-tietue
      */
-    public void add(State x) {
+    public void add(State state) {
+        // Mikäli minimikeon taulukko on liian pieni, kasvatetaan taulukkoa.
         if (this.size == this.heap.length - 1) {
-            resize();
+            this.resize();
         }
         
         this.size++;
-        int pos = this.size;
+        int index = this.size;
         
-        while(pos > 1 && x.compareTo(this.heap[pos/2]) < 0) {
-            this.heap[pos] = this.heap[pos/2];
-            pos = pos/2;
+        while (index > 1 && state.compareTo(this.heap[index / 2]) < 0) {
+            this.heap[index] = this.heap[index / 2];
+            index = index / 2;
         }
         
-        this.heap[pos] = x;
+        this.heap[index] = state;
     }
     
-    
     /**
-     * Kasvattaa keon käyttämän taulun kokoa
+     * Kasvattaa minimikeon taulukon koon tarvittaessa.
      */
     private void resize() {
-        State [] old = this.heap;
+        // Luetaan muistiin nykyinen taulukko ja luodaan uusi taulukko.
+        State[] current = this.heap;
         this.heap = (State[]) new Comparable[this.heap.length * 2];
         
+        // Manuaalisesti kopioi nykyisen taulukon alkiot uuteen taulukkoon.
         for (int i = 0; i < this.size; i++) {
-            this.heap[i + 1] = old[i + 1];
+            this.heap[i + 1] = current[i + 1];
         }
     }
 }
