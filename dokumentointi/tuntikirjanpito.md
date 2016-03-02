@@ -45,3 +45,7 @@
 **26.2.2016:** 4 tuntia
 
 * Simulaatio toteutettu. Niin koodia kuin sen kommentointia on hiottu erityisesti Checkstyle- ja PIT-rapottien avulla. Checkstyle-raportissa näkyi tällä kertaa edellisen "sääntöjen rikkomuksen" eli suuren JavaDoc-määrän lisäksi virhe "ClassTypeParameterName", joka on kuitenkin itsessään virheellinen ilmaus. Tarkistin kyseisen rivin koodissani ja se on täysin validi sekä ainoa tapa saada haluamani toiminnallisuus. Laadittu myös rakennekuvaus aihemäärittelyn jatkoksi sekä erillinen käyttöohje.
+
+**2.3.2016:** 7 tuntia
+
+* *Tiralabra:* Toiminnallisuuksien viimeistely. Suorituskykytestausta suoritettu ja viimeistä palautusta ajatellen juuri testausdokumentaatiota on vielä oleellisesti päivitettävä. Kaikki toimii nyt kuten pitääkin ja muu dokumentaatio on myös pian valmis. Vertaisarviointi suoritettu.

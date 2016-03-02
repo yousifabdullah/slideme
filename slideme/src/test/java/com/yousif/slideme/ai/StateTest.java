@@ -11,7 +11,7 @@ import static org.junit.Assert.*;
  */
 public class StateTest {
     
-    // State.nextState()-metodin yksikkötestit.
+    // State.getNextState()-metodin yksikkötestit.
     @Test
     public void nextStateUpWhenPossible() {
         State state1 = new State(new int[]{1, 2, 3, 4, 5, 6, 7, 8, 0});

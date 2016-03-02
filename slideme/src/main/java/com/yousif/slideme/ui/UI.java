@@ -31,6 +31,8 @@ public class UI implements Runnable, ActionListener {
     private final Board board;
     private final JButton[] tiles;
     
+    private boolean simulating;
+    
     /**
      * Alustaa käyttöliittymän uudella pelitilanteella.
      * 
@@ -42,6 +44,9 @@ public class UI implements Runnable, ActionListener {
         
         this.board = board;
         this.tiles = new JButton[9];
+        
+        // Määritetään aluksi, että simulaatiota ei ole vielä käynnistetty.
+        this.simulating = false;
     }
     
     /**
@@ -167,6 +172,13 @@ public class UI implements Runnable, ActionListener {
         
         // Päivityksen yhteydessä tarkistetaan, onko peli ratkaistu.
         if (Array.matches(this.board.getCurrentState(), this.board.getSolution())) {
+            // Odotetaan 0,1s (kosmeettinen) viive ennen ilmoitusikkunaa.
+            delay: try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                break delay;
+            }
+            
             JOptionPane.showMessageDialog(this.frame,
                     "Mahtavaa, peliruudut ovat taas järjestyksessä!\n"
                             + "(Siirtoja: " + this.board.getMovesCount() + ")",
@@ -207,6 +219,17 @@ public class UI implements Runnable, ActionListener {
     }
     
     /**
+     * Vapauttaa käyttäjän syötteelle asetetun lukon, sallien tapahtuma-
+     * komentojen käsittelyn käyttöliittymässä.
+     */
+    void releaseUILock(Object source) {
+        JButton trigger = (JButton) source;
+        trigger.setEnabled(true);
+        
+        this.simulating = false;
+    }
+    
+    /**
      * Käsittelee tapahtumat (eli hiiren osoitukset) tapahtumakomentojen
      * avulla.
      * 
@@ -214,6 +237,11 @@ public class UI implements Runnable, ActionListener {
      */
     @Override
     public void actionPerformed(ActionEvent event) {
+        // Kun simulaatio on käynnissä, tapahtumakomentoja ei huomioida.
+        if (this.simulating) {
+            return;
+        }
+        
         String action = event.getActionCommand();
         
         /*
@@ -229,7 +257,16 @@ public class UI implements Runnable, ActionListener {
             switch (action) {
                 case "slideme":
                     // Käynnistetään tekoälyn simulaatio.
-                    new Simulation(this).run();
+                    new Simulation(this, event.getSource()).run();
+                    
+                    /*
+                    Lukitaan käyttöliittymä simulaation ajaksi käyttäjän
+                    syötteiltä.
+                    */
+                    JButton trigger = (JButton) event.getSource();
+                    trigger.setEnabled(false);
+                    
+                    this.simulating = true;
                     
                     break;
                 case "shuffle":

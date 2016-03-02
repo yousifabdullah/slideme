@@ -25,6 +25,7 @@ public class UniqueSet {
     
     /**
      * Yliviivaa eli merkkaa läpikäydyksi annetun iteraation taulukossa.
+     * Toiminnon aikavaativuus on O(1).
      * 
      * @param key iteraatio numeerisessa muodossa
      */
@@ -37,6 +38,7 @@ public class UniqueSet {
     
     /**
      * Tarkistaa, onko annettu iteraatio yliviivattu taulukossa.
+     * Toiminnon aikavaativuus on O(1).
      * 
      * @param key iteraatio numeerisessa muodossa
      * @return true, kun iteraatio on yliviivattu ja muutoin false

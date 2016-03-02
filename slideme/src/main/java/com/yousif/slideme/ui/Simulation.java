@@ -13,6 +13,7 @@ import java.util.TimerTask;
 public class Simulation extends TimerTask {
     
     private final UI ui;
+    private final Object trigger;
     private final Timer timer;
     
     private int[] path;
@@ -25,14 +26,17 @@ public class Simulation extends TimerTask {
      * sekä Timer-olion, joka simuloi välivaiheet.
      * 
      * @param ui käsiteltävä käyttöliittymä UI-tietueena
+     * @param trigger simulaation käynnistävä komponentti
      */
-    public Simulation(UI ui) {
+    public Simulation(UI ui, Object trigger) {
         this.ui = ui;
+        this.trigger = trigger;
         this.timer = new Timer();
         
         this.path = new int[0];
         this.step = 0;
         
+        // Määritetään aluksi, että simulaatio ei ole vielä käynnissä.
         this.running = false;
     }
     
@@ -45,7 +49,7 @@ public class Simulation extends TimerTask {
         Mikäli simulaatio ei ole vielä käynnissä, alustetaan hakualgoritmi
         eli tekoäly ja käynnistetään Timer-olio.
         */
-        if (this.running == false) {
+        if (!this.running) {
             this.running = true;
             
             /*
@@ -56,7 +60,7 @@ public class Simulation extends TimerTask {
             this.path = solver.findPath();
             
             // Määritetään Timer-olio simuloimaan välivaiheet 0,5s välein.
-            this.timer.schedule(this, 0, 500);
+            this.timer.schedule(this, 0, 5);
         } else {
             /*
             Simuloidaan yksi askel kerrallaan käyttöliittymässä, kunnes
@@ -68,10 +72,13 @@ public class Simulation extends TimerTask {
             } else {
                 /*
                 Mikäli viimeinen välivaihe on simuloitu, puretaan muistista
-                Timer-olio ja perutaan mahdolliset jonossa olevat kutsut.
+                Timer-olio ja perutaan mahdolliset jonossa olevat kutsut sekä
+                vapautetaan käyttäjän syötteen lukko käyttöliittymässä.
                 */
                 timer.cancel();
                 timer.purge();
+                
+                this.ui.releaseUILock(this.trigger);
             }
         }
     }

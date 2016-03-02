@@ -17,6 +17,9 @@ public class Solver {
     
     private final Board board;
     
+    // Huom. tämä vakiomuuttuja vaikuttaa heuristiseen funktioon.
+    private static final boolean USE_BFS_ALGORITHM = false;
+    
     /**
      * Alustaa tekoälyn nykyisen pelitilanteen mukaisesti.
      * 
@@ -34,10 +37,12 @@ public class Solver {
      * pelitilanteesta ratkaisuun. Haku toteuttaa A*-algoritmin tai vaihto-
      * ehtoisesti heuristiikasta riippuen BFS-algoritmin. Seuraavan läpi-
      * käytävän iteraation priorisointi tapahtuu minimikeon avulla ja jo
-     * käydyt iteraatiot aina yliviivataan, jottei algoritmi tee ylimääräistä
+     * käydyt iteraatiot aina merkataan, jottei algoritmi tee ylimääräistä
      * työtä.
      * 
-     * Hakualgoritmin aikavaativuus pahimmassa tapauksessa on O(|E| + |V|).
+     * Hakualgoritmin aikavaativuus pahimmassa tapauksessa on O(|V| + |E|)
+     * eli se käy tarvittaessa kaikki solmut ja kaaret läpi. Huom. O(|E|) voi
+     * vaihdella O(1) ja O(|V|^2) välillä.
      * 
      * @return välivaiheiden polku lähtötilanteesta ratkaisuun
      */
@@ -82,7 +87,7 @@ public class Solver {
             }
         }
         
-        // Mikäli polkua ei löydy, palautetaan tyhjä taulukko.
+        // Mikäli polkua ei löydy, palautetaan tyhjä polku.
         return new int[0];
     }
     
@@ -90,13 +95,14 @@ public class Solver {
      * Käy läpi hakualgoritmin toteuttaman polun ja palauttaa sen käänteisessä
      * järjestyksessä. Koska hakualgoritmin toiminta päätyy löytäessään
      * ratkaisun, on ketjun järjestys käytävä läpi käänteisesti, jotta väli-
-     * vaiheet voi simuloida lähtötilanteesta ratkaisuun.
+     * vaiheet voi simuloida lähtötilanteesta ratkaisuun. Toiminnon aika-
+     * vaativuus on O(n).
      * 
      * @param state iteraatio, joka vastaa ratkaisua
      * @return hakualgoritmin polku käänteisessä järjestyksessä
      */
     private int[] tracePath(State state) {
-        // Alustetaan muistiin taulukko välivaiheiden polulle
+        // Alustetaan muistiin taulukko välivaiheiden polulle.
         int[] path = new int[state.getDistance() + 1];
         int iteration = path.length - 1;
         
@@ -116,13 +122,34 @@ public class Solver {
     
     /**
      * Hakualgoritmin heuristinen funktio, joka palauttaa maksimin kaikkien
-     * peliruutujen Manhattan-etäisyydestä.
+     * peliruutujen Manhattan-etäisyydestä. Luokan vakiomuuttujasta riippuen
+     * voidaan toteuttaa BFS-algoritmi, jolloin heuristinen funktio palauttaa
+     * aina arvon 0. Heuristisen funktion aikavaativuus pahimmassa tapauksessa
+     * on O(n), paitsi BFS-algoritmin toteuttavassa muodossa, jolloin se on
+     * O(1).
+     * 
+     * Tässä erikoistapauksessa hakualgoritmi käyttäytyy samalla tavalla,
+     * kuin esim. Dijkstran algoritmi, koska solmuja ei erikseen priorisoida
+     * arvioidun etäisyyden perusteella. Koska kuitenkin 8-peli toteuttaa
+     * omanlaisen erikoistapauksensa, jossa kaarten etäisyys on aina 1, toimii
+     * hakualgoritmi best-first -menetelmää noudattaen, siis BFS-algoritmin
+     * mukaisesti. Tämä pitää paikkansa, koska vapaaruutu siirtyy tekoälyssä
+     * vain yhden ruudun kerrallaan, siis jokaisessa iteraatiossa hakualgoritmi
+     * kulkee vain yhtä kaarta pitkin.
      * 
      * @param iteration iteraatio peliruuduista int[]-taulukkona
      * @return annetun iteraation heuristinen arvo
      */
     static int heuristic(int[] iteration) {
         int heuristic = 0;
+        
+        /*
+        Mikäli luokan vakiomuuttujassa on määritelty BFS-algoritmin käyttö,
+        palautetaan heuristiikaksi aina arvo 0.
+        */
+        if (Solver.USE_BFS_ALGORITHM) {
+            return heuristic;
+        }
         
         for (int i = 0; i < iteration.length; i++) {
             // Huom. 0 merkitsee vapaaruutua, ei lukua 0!
@@ -136,7 +163,8 @@ public class Solver {
     
     /**
      * Aputoiminto heuristiselle funktiolle, joka laskee Manhattan-etäisyyden
-     * annettujen indeksien välillä oleville peliruuduille.
+     * annettujen indeksien välillä oleville peliruuduille. Toiminnon aika-
+     * vaativuus on O(1).
      * 
      * @param a ensimmäinen tarkasteltava indeksi
      * @param b toinen tarkasteltava indeksi
