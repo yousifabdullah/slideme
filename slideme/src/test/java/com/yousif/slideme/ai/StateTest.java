@@ -7,11 +7,12 @@ import static org.junit.Assert.*;
 /**
  * Array-apuluokan yksikkötestit.
  * 
- * @author Yousif Abdullah <yousif.abdullah@helsinki.fi>
+ * @author Yousif Abdullah {@literal<yousif.abdullah@helsinki.fi>}
  */
 public class StateTest {
     
     // State.getNextState()-metodin yksikkötestit.
+    
     @Test
     public void nextStateUpWhenPossible() {
         State state1 = new State(new int[]{1, 2, 3, 4, 5, 6, 7, 8, 0});

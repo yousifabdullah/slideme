@@ -21,7 +21,7 @@ import javax.swing.border.EmptyBorder;
 /**
  * Graafisen käyttöliittymän määrittävä luokka.
  * 
- * @author Yousif Abdullah <yousif.abdullah@helsinki.fi>
+ * @author Yousif Abdullah {@literal<yousif.abdullah@helsinki.fi>}
  */
 public class UI implements Runnable, ActionListener {
     

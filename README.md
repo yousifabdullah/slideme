@@ -4,9 +4,6 @@
 
 **Dokumentaatio:**
 
-* [Aiheen kuvaus](dokumentointi/aiheenKuvausJaRakenne.md)
-* [Käyttöohjeet](dokumentointi/kayttoohjeet.md)
-* [Tuntikirjanpito](dokumentointi/tuntikirjanpito.md)
-* [Testausdokumentti](dokumentointi/testausdokumentti.md)
-* [Toteutusdokumentti](dokumentointi/toteutusdokumentti.md)
-* [Viikkoraportti (tiralabra)](dokumentointi/viikkoraportti.md)
+* [Aiheen kuvaus](dokumentointi/aiheenKuvausJaRakenne.md), [käyttöohjeet](dokumentointi/kayttoohjeet.md)
+* [Toteutus-](dokumentointi/toteutusdokumentti.md), [testausdokumentti](dokumentointi/testausdokumentti.md)
+* [Tuntikirjanpito](dokumentointi/tuntikirjanpito.md), [viikkoraportti (tiralabra)](dokumentointi/viikkoraportti.md)

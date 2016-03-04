@@ -3,7 +3,7 @@ package com.yousif.slideme.struc;
 /**
  * Erikoistietorakenne 8-pelille, joka korvaa HashSet-tietorakenteen.
  * 
- * @author Yousif Abdullah <yousif.abdullah@helsinki.fi>
+ * @author Yousif Abdullah {@literal<yousif.abdullah@helsinki.fi>}
  */
 public class UniqueSet {
     
@@ -11,7 +11,7 @@ public class UniqueSet {
     
     /**
      * Luo taulukon, joka sisältää kaikki mahdolliset 8-pelin permutaatiot
-     * numeerisessa muodossa, kuten 012345678 ja 876543210. Vaikka taulun
+     * numeerisessa muodossa, kuten 012345678 ja 876543210. Vaikka taulukon
      * tilavaativuus on suuri, noin O(241 * n), käyttää se boolean[]-
      * taulukkona muistia vain kohtuullisesti.
      * 
@@ -58,21 +58,18 @@ public class UniqueSet {
      * esitystä joukosta {0, 1, 2, 3, 4, 5, 6, 7, 8}, voidaan jättää aina
      * viimeinen luku esityksessä huomioimatta jakamalla luvun kymmenellä.
      * 
-     * Todistus: koska alkiot joukossa ovat uniikkeja, saamme edelleen
-     * kaikki permutaatiot esitettyä ilman viimeistä alkiota. Välin [0, 8]
-     * muodostavat alkiot voidaan permutoida 9! kertaa. Tätä tietoa apuna
-     * käyttäen vaihtoehdot permutaatiossa suppenevat loppua myöten, eli
-     * 9! = 9 * 8 * 7 * 6 * 5 * 4 * 3 * 2 * 1, jolloin huomataan viimeisen
-     * alkion merkitys permutaatiossa. Koska luku kerrottuna yhdellä on yhtä
-     * kuin luku itsessään, voidaan viimeinen laskutoimitus jättää väliin,
-     * toisin sanoen voidaan jättää viimeinen alkio huomioimatta.
+     * Todistus: joukossa välin [0, 8] muodostavat alkiot voidaan permutoida
+     * 9! kertaa, jolloin vaihtoehdot permutaatiossa suppenevat loppua myöten,
+     * eli 9! = 9 * 8 * 7 * 6 * 5 * 4 * 3 * 2 * 1. Tätä tietoa apuna käyttäen
+     * huomataan viimeisen alkion merkitys permutaatiossa, joka voidaan aina
+     * jättää huomioimatta, koska on joka tapauksessa vain yksi mahdollinen
+     * tapa valita permutaation viimeinen alkio.
      * 
      * Tarkistus: Heapin algoritmia apuna käyttäen kaikkien permutaatioiden
      * esitys välin [0, 8] muodostaville alkioille tuottaa 362880 erilaista
      * permutaatiota eli tasan 9!:n verran. Samoin optimoitua esitysmuotoa
-     * käyttäen päädytään jälleen 362880 eri permutaatioon. Optimointi on
-     * toimiva ja sen ansiosta tilavaativuus on vain 1/10 alkuperäisestä eli
-     * naiivista toteutuksesta.
+     * käyttäen päädytään jälleen 362880 eri permutaatioon. Siis optimointi
+     * on bijektio ja sen ansiosta tilavaativuus on vain 1/10 alkuperäisestä.
      * 
      * Optimoinnilla tietorakenteen tilavaativuus saadaan siis kuriin ja
      * taatut O(1) aikavaativuuden toiminnot tasapainottavat suurta tila-

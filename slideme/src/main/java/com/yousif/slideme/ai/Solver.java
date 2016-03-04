@@ -8,17 +8,17 @@ import com.yousif.slideme.struc.UniqueSet;
 /**
  * Tekoälyn toiminnallisuuden määrittävä luokka.
  * 
- * @author Yousif Abdullah <yousif.abdullah@helsinki.fi>
+ * @author Yousif Abdullah {@literal<yousif.abdullah@helsinki.fi>}
  */
 public class Solver {
     
-    private final UniqueSet closed;
-    private final MinHeap<State> queue;
-    
     private final Board board;
     
+    private MinHeap<State> queue;
+    private UniqueSet closed;
+    
     // Huom. tämä vakiomuuttuja vaikuttaa heuristiseen funktioon.
-    private static final boolean USE_BFS_ALGORITHM = false;
+    private static final boolean USE_BESTFIRST = false;
     
     /**
      * Alustaa tekoälyn nykyisen pelitilanteen mukaisesti.
@@ -27,9 +27,6 @@ public class Solver {
      */
     public Solver(Board board) {
         this.board = board;
-        
-        this.closed = new UniqueSet();
-        this.queue = new MinHeap<>();
     }
     
     /**
@@ -47,19 +44,22 @@ public class Solver {
      * @return välivaiheiden polku lähtötilanteesta ratkaisuun
      */
     public int[] findPath() {
+        /*
+        Alustetaan hakualgoritmin käyttämät tietorakenteet ja lisätään
+        nykyinen iteraatio minimikeon juureen.
+        */
+        this.queue = new MinHeap<>();
+        this.closed = new UniqueSet();
         
-        // Alustetaan minimikeko ja lisätään nykyinen iteraatio juureen.
-        queue.clear();
-        queue.add(new State(this.board.getCurrentState()));
+        this.queue.insert(new State(this.board.getCurrentState())); 
         
         /*
         Suoritetaan haku niin kauan, kunnes minimikeossa ei enää ole
         läpikäytäviä iteraatioita.
         */
-        while (!queue.isEmpty()) {
-            
+        while (!this.queue.isEmpty()) {
             // Luetaan minimikeosta iteraatio, jonka prioriteetti on pienin.
-            State state = queue.poll();
+            State state = this.queue.retrieve();
             
             // Jos iteraatio vastaa ratkaisua, loppuu algoritmin toiminta heti.
             if (Array.matches(state.getCurrentIteration(), this.board.getSolution())) {
@@ -67,7 +67,7 @@ public class Solver {
             }
             
             // Merkataan eli yliviivataan tarkasteltava iteraatio käsitellyksi.
-            closed.strike(state.getCurrentAsInteger());
+            this.closed.strike(state.getCurrentAsInteger());
             
             /*
             Lisätään minimikekoon enimmillään neljä uutta iteraatiota vapaa-
@@ -81,8 +81,10 @@ public class Solver {
                 Huom. aluksi tarkistetaan, että iteraatio ei ole tyhjä tai
                 yliviivattu.
                 */
-                if (successor != null && !closed.check(successor.getCurrentAsInteger())) {
-                    queue.add(successor);
+                if (successor != null) {
+                    if (!this.closed.check(successor.getCurrentAsInteger())) {
+                        this.queue.insert(successor);
+                    }
                 }
             }
         }
@@ -130,24 +132,25 @@ public class Solver {
      * 
      * Tässä erikoistapauksessa hakualgoritmi käyttäytyy samalla tavalla,
      * kuin esim. Dijkstran algoritmi, koska solmuja ei erikseen priorisoida
-     * arvioidun etäisyyden perusteella. Koska kuitenkin 8-peli toteuttaa
-     * omanlaisen erikoistapauksensa, jossa kaarten etäisyys on aina 1, toimii
-     * hakualgoritmi best-first -menetelmää noudattaen, siis BFS-algoritmin
-     * mukaisesti. Tämä pitää paikkansa, koska vapaaruutu siirtyy tekoälyssä
-     * vain yhden ruudun kerrallaan, siis jokaisessa iteraatiossa hakualgoritmi
-     * kulkee vain yhtä kaarta pitkin.
+     * arvioidun etäisyyden perusteella. Tämän lisäksi 8-peli toteuttaa oman-
+     * laisen erikoistapauksensa, jossa kaarten etäisyys on aina 1. Toisin
+     * sanoen, hakualgoritmi noudattaa best-first -menetelmää solmujen läpi-
+     * käyntiin, siis BFS-algoritmin mukaisesti. Tämä pitää paikkansa, koska
+     * vapaaruutu siirtyy tekoälyssä vain yhden ruudun kerrallaan: jokaisessa
+     * iteraatiossa hakualgoritmi kulkee vain yhtä kaarta pitkin.
      * 
      * @param iteration iteraatio peliruuduista int[]-taulukkona
+     * @see com.yousif.slideme.ai.Solver#manhattanDistance(int, int)
      * @return annetun iteraation heuristinen arvo
      */
-    static int heuristic(int[] iteration) {
+    public static int heuristic(int[] iteration) {
         int heuristic = 0;
         
         /*
         Mikäli luokan vakiomuuttujassa on määritelty BFS-algoritmin käyttö,
         palautetaan heuristiikaksi aina arvo 0.
         */
-        if (Solver.USE_BFS_ALGORITHM) {
+        if (Solver.USE_BESTFIRST) {
             return heuristic;
         }
         
@@ -170,7 +173,7 @@ public class Solver {
      * @param b toinen tarkasteltava indeksi
      * @return Manhattan-etäisyys indeksien välillä oleville peliruuduille
      */
-    static int manhattanDistance(int a, int b) {
+    private static int manhattanDistance(int a, int b) {
         return Math.abs(a / 3 - b / 3) + Math.abs(a % 3 - b % 3);
     }
 }

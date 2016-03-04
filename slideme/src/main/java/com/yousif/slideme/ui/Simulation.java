@@ -8,7 +8,7 @@ import java.util.TimerTask;
 /**
  * Tekoälyn simulaation määrittävä luokka.
  * 
- * @author Yousif Abdullah <yousif.abdullah@helsinki.fi>
+ * @author Yousif Abdullah {@literal<yousif.abdullah@helsinki.fi>}
  */
 public class Simulation extends TimerTask {
     
@@ -60,7 +60,7 @@ public class Simulation extends TimerTask {
             this.path = solver.findPath();
             
             // Määritetään Timer-olio simuloimaan välivaiheet 0,5s välein.
-            this.timer.schedule(this, 0, 5);
+            this.timer.schedule(this, 0, 500);
         } else {
             /*
             Simuloidaan yksi askel kerrallaan käyttöliittymässä, kunnes

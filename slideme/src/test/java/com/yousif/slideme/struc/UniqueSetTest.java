@@ -7,7 +7,7 @@ import static org.junit.Assert.*;
 /**
  * UniqueSet-tietorakenteen yksikkötestit.
  * 
- * @author Yousif Abdullah <yousif.abdullah@helsinki.fi>
+ * @author Yousif Abdullah {@literal<yousif.abdullah@helsinki.fi>}
  */
 public class UniqueSetTest {
     
@@ -19,6 +19,7 @@ public class UniqueSetTest {
     }
     
     // UniqueSet.optimize()-metodin yksikkötestit.
+    
     @Test
     public void referenceWithZeroInLastIndex() {
         int key = UniqueSetTest.test.optimize(123456780);
@@ -48,6 +49,7 @@ public class UniqueSetTest {
     }
     
     // UniqueSet.strike() ja .check() -metodien yksikkötestit.
+    
     @Test
     public void strikeAndCheckWithinBoundaries() {
         UniqueSetTest.test.strike(123456780);

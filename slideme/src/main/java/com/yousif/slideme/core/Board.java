@@ -3,7 +3,7 @@ package com.yousif.slideme.core;
 /**
  * Pelitilannetta ylläpitävä luokka.
  * 
- * @author Yousif Abdullah <yousif.abdullah@helsinki.fi>
+ * @author Yousif Abdullah {@literal<yousif.abdullah@helsinki.fi>}
  */
 public final class Board {
     
@@ -31,7 +31,7 @@ public final class Board {
         1. tai 5. indeksin kohdalla on vapaaruutu (eli vasemmalle tai
         alas siirtymällä).
         
-        Indeksit luetaan 3*3-ruudun suuruista alustaa noudattaen vasemmalta
+        Indeksit luetaan 3x3-ruudun suuruista alustaa noudattaen vasemmalta
         ylhäältä eli esim. 5. indeksi sijoittuisi toisen rivin viimeiseksi
         peliruuduksi kuten alla olevassa kuvassa havainnoillistettuna:
         

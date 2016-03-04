@@ -11,7 +11,7 @@
 <a class="jxr_linenumber" name="L3" href="#L3">3</a>   <em class="jxr_javadoccomment">/**</em>
 <a class="jxr_linenumber" name="L4" href="#L4">4</a>   <em class="jxr_javadoccomment"> * Erikoistietorakenne 8-pelille, joka korvaa HashSet-tietorakenteen.</em>
 <a class="jxr_linenumber" name="L5" href="#L5">5</a>   <em class="jxr_javadoccomment"> * </em>
-<a class="jxr_linenumber" name="L6" href="#L6">6</a>   <em class="jxr_javadoccomment"> * @author Yousif Abdullah &lt;yousif.abdullah@helsinki.fi&gt;</em>
+<a class="jxr_linenumber" name="L6" href="#L6">6</a>   <em class="jxr_javadoccomment"> * @author Yousif Abdullah {@literal&lt;yousif.abdullah@helsinki.fi&gt;}</em>
 <a class="jxr_linenumber" name="L7" href="#L7">7</a>   <em class="jxr_javadoccomment"> */</em>
 <a class="jxr_linenumber" name="L8" href="#L8">8</a>   <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">class</strong> <a href="../../../../com/yousif/slideme/struc/UniqueSet.html">UniqueSet</a> {
 <a class="jxr_linenumber" name="L9" href="#L9">9</a>       
@@ -19,7 +19,7 @@
 <a class="jxr_linenumber" name="L11" href="#L11">11</a>      
 <a class="jxr_linenumber" name="L12" href="#L12">12</a>      <em class="jxr_javadoccomment">/**</em>
 <a class="jxr_linenumber" name="L13" href="#L13">13</a>  <em class="jxr_javadoccomment">     * Luo taulukon, joka sisältää kaikki mahdolliset 8-pelin permutaatiot</em>
-<a class="jxr_linenumber" name="L14" href="#L14">14</a>  <em class="jxr_javadoccomment">     * numeerisessa muodossa, kuten 012345678 ja 876543210. Vaikka taulun</em>
+<a class="jxr_linenumber" name="L14" href="#L14">14</a>  <em class="jxr_javadoccomment">     * numeerisessa muodossa, kuten 012345678 ja 876543210. Vaikka taulukon</em>
 <a class="jxr_linenumber" name="L15" href="#L15">15</a>  <em class="jxr_javadoccomment">     * tilavaativuus on suuri, noin O(241 * n), käyttää se boolean[]-</em>
 <a class="jxr_linenumber" name="L16" href="#L16">16</a>  <em class="jxr_javadoccomment">     * taulukkona muistia vain kohtuullisesti.</em>
 <a class="jxr_linenumber" name="L17" href="#L17">17</a>  <em class="jxr_javadoccomment">     * </em>
@@ -33,64 +33,63 @@
 <a class="jxr_linenumber" name="L25" href="#L25">25</a>      
 <a class="jxr_linenumber" name="L26" href="#L26">26</a>      <em class="jxr_javadoccomment">/**</em>
 <a class="jxr_linenumber" name="L27" href="#L27">27</a>  <em class="jxr_javadoccomment">     * Yliviivaa eli merkkaa läpikäydyksi annetun iteraation taulukossa.</em>
-<a class="jxr_linenumber" name="L28" href="#L28">28</a>  <em class="jxr_javadoccomment">     * </em>
-<a class="jxr_linenumber" name="L29" href="#L29">29</a>  <em class="jxr_javadoccomment">     * @param key iteraatio numeerisessa muodossa</em>
-<a class="jxr_linenumber" name="L30" href="#L30">30</a>  <em class="jxr_javadoccomment">     */</em>
-<a class="jxr_linenumber" name="L31" href="#L31">31</a>      <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> strike(<strong class="jxr_keyword">int</strong> key) {
-<a class="jxr_linenumber" name="L32" href="#L32">32</a>          <em class="jxr_comment">// Huom. aluksi tarkistetaan, että indeksit löytyvät taulukosta.</em>
-<a class="jxr_linenumber" name="L33" href="#L33">33</a>          <strong class="jxr_keyword">if</strong> (12345678 &lt;= key &amp;&amp; key &lt;= 876543210) {
-<a class="jxr_linenumber" name="L34" href="#L34">34</a>              <strong class="jxr_keyword">this</strong>.state[optimize(key)] = <strong class="jxr_keyword">true</strong>;
-<a class="jxr_linenumber" name="L35" href="#L35">35</a>          }
-<a class="jxr_linenumber" name="L36" href="#L36">36</a>      }
-<a class="jxr_linenumber" name="L37" href="#L37">37</a>      
-<a class="jxr_linenumber" name="L38" href="#L38">38</a>      <em class="jxr_javadoccomment">/**</em>
-<a class="jxr_linenumber" name="L39" href="#L39">39</a>  <em class="jxr_javadoccomment">     * Tarkistaa, onko annettu iteraatio yliviivattu taulukossa.</em>
-<a class="jxr_linenumber" name="L40" href="#L40">40</a>  <em class="jxr_javadoccomment">     * </em>
-<a class="jxr_linenumber" name="L41" href="#L41">41</a>  <em class="jxr_javadoccomment">     * @param key iteraatio numeerisessa muodossa</em>
-<a class="jxr_linenumber" name="L42" href="#L42">42</a>  <em class="jxr_javadoccomment">     * @return true, kun iteraatio on yliviivattu ja muutoin false</em>
-<a class="jxr_linenumber" name="L43" href="#L43">43</a>  <em class="jxr_javadoccomment">     */</em>
-<a class="jxr_linenumber" name="L44" href="#L44">44</a>      <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">boolean</strong> check(<strong class="jxr_keyword">int</strong> key) {
-<a class="jxr_linenumber" name="L45" href="#L45">45</a>          <em class="jxr_comment">// Huom. aluksi tarkistetaan, että indeksit löytyvät taulukosta.</em>
-<a class="jxr_linenumber" name="L46" href="#L46">46</a>          <strong class="jxr_keyword">if</strong> (12345678 &lt;= key &amp;&amp; key &lt;= 876543210) {
-<a class="jxr_linenumber" name="L47" href="#L47">47</a>              <strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">this</strong>.state[optimize(key)];
-<a class="jxr_linenumber" name="L48" href="#L48">48</a>          }
-<a class="jxr_linenumber" name="L49" href="#L49">49</a>          
-<a class="jxr_linenumber" name="L50" href="#L50">50</a>          <strong class="jxr_keyword">return</strong> false;
-<a class="jxr_linenumber" name="L51" href="#L51">51</a>      }
-<a class="jxr_linenumber" name="L52" href="#L52">52</a>      
-<a class="jxr_linenumber" name="L53" href="#L53">53</a>      <em class="jxr_javadoccomment">/**</em>
-<a class="jxr_linenumber" name="L54" href="#L54">54</a>  <em class="jxr_javadoccomment">     * Kriittinen optimointi: muuntaa annetun iteraation numeerisen muodon</em>
-<a class="jxr_linenumber" name="L55" href="#L55">55</a>  <em class="jxr_javadoccomment">     * pienempään kokoon. Koska annettu iteraatio aina vastaa numeerista</em>
-<a class="jxr_linenumber" name="L56" href="#L56">56</a>  <em class="jxr_javadoccomment">     * esitystä joukosta {0, 1, 2, 3, 4, 5, 6, 7, 8}, voidaan jättää aina</em>
-<a class="jxr_linenumber" name="L57" href="#L57">57</a>  <em class="jxr_javadoccomment">     * viimeinen luku esityksessä huomioimatta jakamalla luvun kymmenellä.</em>
-<a class="jxr_linenumber" name="L58" href="#L58">58</a>  <em class="jxr_javadoccomment">     * </em>
-<a class="jxr_linenumber" name="L59" href="#L59">59</a>  <em class="jxr_javadoccomment">     * Todistus: koska alkiot joukossa ovat uniikkeja, saamme edelleen</em>
-<a class="jxr_linenumber" name="L60" href="#L60">60</a>  <em class="jxr_javadoccomment">     * kaikki permutaatiot esitettyä ilman viimeistä alkiota. Välin [0, 8]</em>
-<a class="jxr_linenumber" name="L61" href="#L61">61</a>  <em class="jxr_javadoccomment">     * muodostavat alkiot voidaan permutoida 9! kertaa. Tätä tietoa apuna</em>
-<a class="jxr_linenumber" name="L62" href="#L62">62</a>  <em class="jxr_javadoccomment">     * käyttäen vaihtoehdot permutaatiossa suppenevat loppua myöten, eli</em>
-<a class="jxr_linenumber" name="L63" href="#L63">63</a>  <em class="jxr_javadoccomment">     * 9! = 9 * 8 * 7 * 6 * 5 * 4 * 3 * 2 * 1, jolloin huomataan viimeisen</em>
-<a class="jxr_linenumber" name="L64" href="#L64">64</a>  <em class="jxr_javadoccomment">     * alkion merkitys permutaatiossa. Koska luku kerrottuna yhdellä on yhtä</em>
-<a class="jxr_linenumber" name="L65" href="#L65">65</a>  <em class="jxr_javadoccomment">     * kuin luku itsessään, voidaan viimeinen laskutoimitus jättää väliin,</em>
-<a class="jxr_linenumber" name="L66" href="#L66">66</a>  <em class="jxr_javadoccomment">     * toisin sanoen voidaan jättää viimeinen alkio huomioimatta.</em>
+<a class="jxr_linenumber" name="L28" href="#L28">28</a>  <em class="jxr_javadoccomment">     * Toiminnon aikavaativuus on O(1).</em>
+<a class="jxr_linenumber" name="L29" href="#L29">29</a>  <em class="jxr_javadoccomment">     * </em>
+<a class="jxr_linenumber" name="L30" href="#L30">30</a>  <em class="jxr_javadoccomment">     * @param key iteraatio numeerisessa muodossa</em>
+<a class="jxr_linenumber" name="L31" href="#L31">31</a>  <em class="jxr_javadoccomment">     */</em>
+<a class="jxr_linenumber" name="L32" href="#L32">32</a>      <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> strike(<strong class="jxr_keyword">int</strong> key) {
+<a class="jxr_linenumber" name="L33" href="#L33">33</a>          <em class="jxr_comment">// Huom. aluksi tarkistetaan, että indeksit löytyvät taulukosta.</em>
+<a class="jxr_linenumber" name="L34" href="#L34">34</a>          <strong class="jxr_keyword">if</strong> (12345678 &lt;= key &amp;&amp; key &lt;= 876543210) {
+<a class="jxr_linenumber" name="L35" href="#L35">35</a>              <strong class="jxr_keyword">this</strong>.state[optimize(key)] = <strong class="jxr_keyword">true</strong>;
+<a class="jxr_linenumber" name="L36" href="#L36">36</a>          }
+<a class="jxr_linenumber" name="L37" href="#L37">37</a>      }
+<a class="jxr_linenumber" name="L38" href="#L38">38</a>      
+<a class="jxr_linenumber" name="L39" href="#L39">39</a>      <em class="jxr_javadoccomment">/**</em>
+<a class="jxr_linenumber" name="L40" href="#L40">40</a>  <em class="jxr_javadoccomment">     * Tarkistaa, onko annettu iteraatio yliviivattu taulukossa.</em>
+<a class="jxr_linenumber" name="L41" href="#L41">41</a>  <em class="jxr_javadoccomment">     * Toiminnon aikavaativuus on O(1).</em>
+<a class="jxr_linenumber" name="L42" href="#L42">42</a>  <em class="jxr_javadoccomment">     * </em>
+<a class="jxr_linenumber" name="L43" href="#L43">43</a>  <em class="jxr_javadoccomment">     * @param key iteraatio numeerisessa muodossa</em>
+<a class="jxr_linenumber" name="L44" href="#L44">44</a>  <em class="jxr_javadoccomment">     * @return true, kun iteraatio on yliviivattu ja muutoin false</em>
+<a class="jxr_linenumber" name="L45" href="#L45">45</a>  <em class="jxr_javadoccomment">     */</em>
+<a class="jxr_linenumber" name="L46" href="#L46">46</a>      <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">boolean</strong> check(<strong class="jxr_keyword">int</strong> key) {
+<a class="jxr_linenumber" name="L47" href="#L47">47</a>          <em class="jxr_comment">// Huom. aluksi tarkistetaan, että indeksit löytyvät taulukosta.</em>
+<a class="jxr_linenumber" name="L48" href="#L48">48</a>          <strong class="jxr_keyword">if</strong> (12345678 &lt;= key &amp;&amp; key &lt;= 876543210) {
+<a class="jxr_linenumber" name="L49" href="#L49">49</a>              <strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">this</strong>.state[optimize(key)];
+<a class="jxr_linenumber" name="L50" href="#L50">50</a>          }
+<a class="jxr_linenumber" name="L51" href="#L51">51</a>          
+<a class="jxr_linenumber" name="L52" href="#L52">52</a>          <strong class="jxr_keyword">return</strong> false;
+<a class="jxr_linenumber" name="L53" href="#L53">53</a>      }
+<a class="jxr_linenumber" name="L54" href="#L54">54</a>      
+<a class="jxr_linenumber" name="L55" href="#L55">55</a>      <em class="jxr_javadoccomment">/**</em>
+<a class="jxr_linenumber" name="L56" href="#L56">56</a>  <em class="jxr_javadoccomment">     * Kriittinen optimointi: muuntaa annetun iteraation numeerisen muodon</em>
+<a class="jxr_linenumber" name="L57" href="#L57">57</a>  <em class="jxr_javadoccomment">     * pienempään kokoon. Koska annettu iteraatio aina vastaa numeerista</em>
+<a class="jxr_linenumber" name="L58" href="#L58">58</a>  <em class="jxr_javadoccomment">     * esitystä joukosta {0, 1, 2, 3, 4, 5, 6, 7, 8}, voidaan jättää aina</em>
+<a class="jxr_linenumber" name="L59" href="#L59">59</a>  <em class="jxr_javadoccomment">     * viimeinen luku esityksessä huomioimatta jakamalla luvun kymmenellä.</em>
+<a class="jxr_linenumber" name="L60" href="#L60">60</a>  <em class="jxr_javadoccomment">     * </em>
+<a class="jxr_linenumber" name="L61" href="#L61">61</a>  <em class="jxr_javadoccomment">     * Todistus: joukossa välin [0, 8] muodostavat alkiot voidaan permutoida</em>
+<a class="jxr_linenumber" name="L62" href="#L62">62</a>  <em class="jxr_javadoccomment">     * 9! kertaa, jolloin vaihtoehdot permutaatiossa suppenevat loppua myöten,</em>
+<a class="jxr_linenumber" name="L63" href="#L63">63</a>  <em class="jxr_javadoccomment">     * eli 9! = 9 * 8 * 7 * 6 * 5 * 4 * 3 * 2 * 1. Tätä tietoa apuna käyttäen</em>
+<a class="jxr_linenumber" name="L64" href="#L64">64</a>  <em class="jxr_javadoccomment">     * huomataan viimeisen alkion merkitys permutaatiossa, joka voidaan aina</em>
+<a class="jxr_linenumber" name="L65" href="#L65">65</a>  <em class="jxr_javadoccomment">     * jättää huomioimatta, koska on joka tapauksessa vain yksi mahdollinen</em>
+<a class="jxr_linenumber" name="L66" href="#L66">66</a>  <em class="jxr_javadoccomment">     * tapa valita permutaation viimeinen alkio.</em>
 <a class="jxr_linenumber" name="L67" href="#L67">67</a>  <em class="jxr_javadoccomment">     * </em>
 <a class="jxr_linenumber" name="L68" href="#L68">68</a>  <em class="jxr_javadoccomment">     * Tarkistus: Heapin algoritmia apuna käyttäen kaikkien permutaatioiden</em>
 <a class="jxr_linenumber" name="L69" href="#L69">69</a>  <em class="jxr_javadoccomment">     * esitys välin [0, 8] muodostaville alkioille tuottaa 362880 erilaista</em>
 <a class="jxr_linenumber" name="L70" href="#L70">70</a>  <em class="jxr_javadoccomment">     * permutaatiota eli tasan 9!:n verran. Samoin optimoitua esitysmuotoa</em>
-<a class="jxr_linenumber" name="L71" href="#L71">71</a>  <em class="jxr_javadoccomment">     * käyttäen päädytään jälleen 362880 eri permutaatioon. Optimointi on</em>
-<a class="jxr_linenumber" name="L72" href="#L72">72</a>  <em class="jxr_javadoccomment">     * toimiva ja sen ansiosta tilavaativuus on vain 1/10 alkuperäisestä eli</em>
-<a class="jxr_linenumber" name="L73" href="#L73">73</a>  <em class="jxr_javadoccomment">     * naiivista toteutuksesta.</em>
-<a class="jxr_linenumber" name="L74" href="#L74">74</a>  <em class="jxr_javadoccomment">     * </em>
-<a class="jxr_linenumber" name="L75" href="#L75">75</a>  <em class="jxr_javadoccomment">     * Optimoinnilla tietorakenteen tilavaativuus saadaan siis kuriin ja</em>
-<a class="jxr_linenumber" name="L76" href="#L76">76</a>  <em class="jxr_javadoccomment">     * taatut O(1) aikavaativuuden toiminnot tasapainottavat suurta tila-</em>
-<a class="jxr_linenumber" name="L77" href="#L77">77</a>  <em class="jxr_javadoccomment">     * vaativuutta. Myös optimoinnin aikavaativuus on O(1).</em>
-<a class="jxr_linenumber" name="L78" href="#L78">78</a>  <em class="jxr_javadoccomment">     * </em>
-<a class="jxr_linenumber" name="L79" href="#L79">79</a>  <em class="jxr_javadoccomment">     * @param key iteraatio numeerisessa muodossa</em>
-<a class="jxr_linenumber" name="L80" href="#L80">80</a>  <em class="jxr_javadoccomment">     * @return optimoitu esitysmuoto</em>
-<a class="jxr_linenumber" name="L81" href="#L81">81</a>  <em class="jxr_javadoccomment">     */</em>
-<a class="jxr_linenumber" name="L82" href="#L82">82</a>      <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">int</strong> optimize(<strong class="jxr_keyword">int</strong> key) {
-<a class="jxr_linenumber" name="L83" href="#L83">83</a>          <strong class="jxr_keyword">return</strong> (<strong class="jxr_keyword">int</strong>) Math.floor(key / 10) - 1;
-<a class="jxr_linenumber" name="L84" href="#L84">84</a>      }
-<a class="jxr_linenumber" name="L85" href="#L85">85</a>  }
+<a class="jxr_linenumber" name="L71" href="#L71">71</a>  <em class="jxr_javadoccomment">     * käyttäen päädytään jälleen 362880 eri permutaatioon. Siis optimointi</em>
+<a class="jxr_linenumber" name="L72" href="#L72">72</a>  <em class="jxr_javadoccomment">     * on bijektio ja sen ansiosta tilavaativuus on vain 1/10 alkuperäisestä.</em>
+<a class="jxr_linenumber" name="L73" href="#L73">73</a>  <em class="jxr_javadoccomment">     * </em>
+<a class="jxr_linenumber" name="L74" href="#L74">74</a>  <em class="jxr_javadoccomment">     * Optimoinnilla tietorakenteen tilavaativuus saadaan siis kuriin ja</em>
+<a class="jxr_linenumber" name="L75" href="#L75">75</a>  <em class="jxr_javadoccomment">     * taatut O(1) aikavaativuuden toiminnot tasapainottavat suurta tila-</em>
+<a class="jxr_linenumber" name="L76" href="#L76">76</a>  <em class="jxr_javadoccomment">     * vaativuutta. Myös optimoinnin aikavaativuus on O(1).</em>
+<a class="jxr_linenumber" name="L77" href="#L77">77</a>  <em class="jxr_javadoccomment">     * </em>
+<a class="jxr_linenumber" name="L78" href="#L78">78</a>  <em class="jxr_javadoccomment">     * @param key iteraatio numeerisessa muodossa</em>
+<a class="jxr_linenumber" name="L79" href="#L79">79</a>  <em class="jxr_javadoccomment">     * @return optimoitu esitysmuoto</em>
+<a class="jxr_linenumber" name="L80" href="#L80">80</a>  <em class="jxr_javadoccomment">     */</em>
+<a class="jxr_linenumber" name="L81" href="#L81">81</a>      <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">int</strong> optimize(<strong class="jxr_keyword">int</strong> key) {
+<a class="jxr_linenumber" name="L82" href="#L82">82</a>          <strong class="jxr_keyword">return</strong> (<strong class="jxr_keyword">int</strong>) Math.floor(key / 10) - 1;
+<a class="jxr_linenumber" name="L83" href="#L83">83</a>      }
+<a class="jxr_linenumber" name="L84" href="#L84">84</a>  }
 </pre>
 <hr/>
 <div id="footer">Copyright &#169; 2016. All rights reserved.</div>

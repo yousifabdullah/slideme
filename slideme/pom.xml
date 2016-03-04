@@ -29,6 +29,11 @@
                 <version>3.3</version>
             </plugin>
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>2.10.3</version>
+            </plugin>
+            <plugin>
                 <groupId>org.pitest</groupId>
                 <artifactId>pitest-maven</artifactId>
                 <version>1.1.8</version>
@@ -36,10 +41,12 @@
                     <targetClasses>
                         <param>com.yousif.slideme.ai.*</param>
                         <param>com.yousif.slideme.core.*</param>
+                        <param>com.yousif.slideme.struc.*</param>
                     </targetClasses>
                     <targetTests>
                         <param>com.yousif.slideme.ai.*</param>
                         <param>com.yousif.slideme.core.*</param>
+                        <param>com.yousif.slideme.struc.*</param>
                     </targetTests>
                 </configuration>
             </plugin>

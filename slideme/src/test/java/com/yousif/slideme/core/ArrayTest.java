@@ -7,11 +7,12 @@ import static org.junit.Assert.*;
 /**
  * Array-apuluokan yksikkötestit.
  * 
- * @author Yousif Abdullah <yousif.abdullah@helsinki.fi>
+ * @author Yousif Abdullah {@literal<yousif.abdullah@helsinki.fi>}
  */
 public class ArrayTest {
     
     // Array.swap()-metodin yksikkötestit.
+    
     @Test
     public void swapIndexesWithinBoundaries() {
         int[] array = new int[]{1, 2, 3, 4};
@@ -37,6 +38,7 @@ public class ArrayTest {
     }
     
     // Array.indexOf()-metodin yksikkötestit.
+    
     @Test
     public void indexOfValueWithinBoundaries() {
         int[] array = new int[]{1, 2, 3, 4};
@@ -52,6 +54,7 @@ public class ArrayTest {
     }
     
     // Array.asInteger()-metodin yksikkötestit.
+    
     @Test
     public void asIntegerEmptyArray() {
         int[] array = new int[0];
@@ -77,6 +80,7 @@ public class ArrayTest {
     }
     
     // Array.copy()-metodin yksikkötestit.
+    
     @Test
     public void copyPopulatedArray() {
         int[] array1 = new int[]{1, 2, 3, 4};
@@ -94,6 +98,7 @@ public class ArrayTest {
     }
     
     // Array.matches()-metodin yksikkötestit.
+    
     @Test
     public void matchesPopulatedArray() {
         int[] array1 = new int[]{1, 2, 3, 4};
@@ -127,6 +132,7 @@ public class ArrayTest {
     }
     
     // Array.swapFirstInversion()-metodin yksikkötestit.
+    
     @Test
     public void swapFirstInversionWithoutInversions() {
         int[] array = new int[]{1, 2, 3, 0};
@@ -168,6 +174,7 @@ public class ArrayTest {
     }
     
     // Array.countInversions()-metodin yksikkötestit.
+    
     @Test
     public void countInversionsWithoutInversions() {
         int[] array = new int[]{1, 2, 3, 0};
@@ -197,6 +204,7 @@ public class ArrayTest {
     }
     
     // Array.shuffleWithEvenInversions()-metodin yksikkötestit.
+    
     @Test
     public void shuffleWithEvenInversionsNoOddInversions() {
         int[] array = new int[]{2, 1, 3, 4};

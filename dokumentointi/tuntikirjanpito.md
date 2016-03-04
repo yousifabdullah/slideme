@@ -49,3 +49,7 @@
 **2.3.2016:** 7 tuntia
 
 * *Tiralabra:* Toiminnallisuuksien viimeistely. Suorituskykytestausta suoritettu ja viimeistä palautusta ajatellen juuri testausdokumentaatiota on vielä oleellisesti päivitettävä. Kaikki toimii nyt kuten pitääkin ja muu dokumentaatio on myös pian valmis. Vertaisarviointi suoritettu.
+
+**4.3.2016:** 4 tuntia
+
+* Dokumentaation viimeistely sekä yksikkötestien osalta viimeiset lisäykset ja testausdokumentin päivitys. Koko projektin tiedostot myös tarkistettu kirjoitusvirheiden ja tyylivirheiden varalta, sekä korjattu 3. käyttötapauksen sekvenssikaavio. Laadittu uusi julkaisu GitHub Releases -välilehdelle ja generoitu JavaDoc projektille.

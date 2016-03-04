@@ -3,7 +3,7 @@ package com.yousif.slideme.core;
 /**
  * Apuluokka int[]-taulukon käsittelylle.
  * 
- * @author Yousif Abdullah <yousif.abdullah@helsinki.fi>
+ * @author Yousif Abdullah {@literal<yousif.abdullah@helsinki.fi>}
  */
 public class Array {
     
@@ -37,7 +37,7 @@ public class Array {
         pariton. Muutoin sallitaan pelitilanteet, jotka ovat mahdottomia
         ratkaista.
         
-        Koska 8-pelissä käytetään 3*3-ruudun suuruista alustaa ja
+        Koska 8-pelissä käytetään 3x3-ruudun suuruista alustaa ja
         ratkaistussa pelitilanteessa on 0 inversiota, eli parillinen
         määrä, voidaan pelitilanteet jakaa kahteen ekvivalenssi-
         luokkaan: niihin, joissa on parillinen määrä inversioita ja
