@@ -53,3 +53,7 @@
 **4.3.2016:** 4 tuntia
 
 * Dokumentaation viimeistely sekä yksikkötestien osalta viimeiset lisäykset ja testausdokumentin päivitys. Koko projektin tiedostot myös tarkistettu kirjoitusvirheiden ja tyylivirheiden varalta, sekä korjattu 3. käyttötapauksen sekvenssikaavio. Laadittu uusi julkaisu GitHub Releases -välilehdelle ja generoitu JavaDoc projektille.
+
+**13.3.2016:** 4 tuntia
+
+* *Tiralabra:* Projektin lopullinen viimeistely. Koko dokumentaation tarkistus sekä oikoluku ja JavaDoc generoitu myös private-metodeille.

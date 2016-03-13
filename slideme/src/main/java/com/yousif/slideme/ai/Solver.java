@@ -8,7 +8,7 @@ import com.yousif.slideme.struc.UniqueSet;
 /**
  * Tekoälyn toiminnallisuuden määrittävä luokka.
  * 
- * @author Yousif Abdullah {@literal<yousif.abdullah@helsinki.fi>}
+ * @author Yousif Abdullah (yousif.abdullah@helsinki.fi)
  */
 public class Solver {
     

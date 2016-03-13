@@ -8,7 +8,7 @@ import java.util.TimerTask;
 /**
  * Tekoälyn simulaation määrittävä luokka.
  * 
- * @author Yousif Abdullah {@literal<yousif.abdullah@helsinki.fi>}
+ * @author Yousif Abdullah (yousif.abdullah@helsinki.fi)
  */
 public class Simulation extends TimerTask {
     

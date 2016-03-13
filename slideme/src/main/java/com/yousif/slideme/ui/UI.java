@@ -21,7 +21,7 @@ import javax.swing.border.EmptyBorder;
 /**
  * Graafisen käyttöliittymän määrittävä luokka.
  * 
- * @author Yousif Abdullah {@literal<yousif.abdullah@helsinki.fi>}
+ * @author Yousif Abdullah (yousif.abdullah@helsinki.fi)
  */
 public class UI implements Runnable, ActionListener {
     
@@ -201,7 +201,6 @@ public class UI implements Runnable, ActionListener {
      * liittymässä.
      * 
      * @param from siirrettävän peliruudun indeksi
-     * @return true, kun siirto on onnistunut ja muutoin false
      */
     void moveTile(int from) {
         if (this.board.moveTile(from)) {
@@ -212,7 +211,7 @@ public class UI implements Runnable, ActionListener {
     /**
      * Palauttaa käyttöliittymän käyttämän Board-tietueen.
      * 
-     * @return nykyinen Board-tietue
+     * @return käytössä oleva Board-tietue
      */
     Board getBoardInstance() {
         return this.board;
@@ -221,6 +220,8 @@ public class UI implements Runnable, ActionListener {
     /**
      * Vapauttaa käyttäjän syötteelle asetetun lukon, sallien tapahtuma-
      * komentojen käsittelyn käyttöliittymässä.
+     * 
+     * @param source simulaation käynnistävä komponentti
      */
     void releaseUILock(Object source) {
         JButton trigger = (JButton) source;

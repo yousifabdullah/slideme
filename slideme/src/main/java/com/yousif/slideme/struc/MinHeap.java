@@ -3,7 +3,7 @@ package com.yousif.slideme.struc;
 /**
  * Oma toteutus minimikeosta, joka korvaa PriorityQueue-tietorakenteen.
  * 
- * @author Yousif Abdullah {@literal<yousif.abdullah@helsinki.fi>}
+ * @author Yousif Abdullah (yousif.abdullah@helsinki.fi)
  * @param <State> State-tietueet vertailtavina solmuina
  */
 public final class MinHeap<State extends Comparable<State>> {
@@ -29,12 +29,12 @@ public final class MinHeap<State extends Comparable<State>> {
      * 
      * Vaikka algoritmi kutsuu bubbleDown()-metodia n / 2 kertaa eli läpi-
      * käytävien solmujen verran, on aikavaativuus pahimmassa tapauksessa
-     * O(n), siitä huolimatta, että bubbleDown()-metodin oma aikavaativuus on
+     * O(n) siitä huolimatta, että bubbleDown()-metodin oma aikavaativuus on
      * O(log n). Tarvittavien askeleiden määrä n-kokoisen keon korjaamiseen
      * voidaan esittää matemaattisesti N = summa kaikista i = 0 käy log(n),
      * jossa laskukaava on (n / 2 ^ (i + 1) * i). Koska algoritmi käy vain
      * n / 2 solmua läpi, voidaan yleisemmin muotoilla (n / 2) * 2 = n ja
-     * n >= N, siis aikavaativuus on myös O(n) eikä O(n log n).
+     * {@literal n >= N}, siis aikavaativuus on myös O(n) eikä O(n log n).
      * 
      * @see com.yousif.slideme.struc.MinHeap#bubbleDown(int)
      */
@@ -48,8 +48,9 @@ public final class MinHeap<State extends Comparable<State>> {
      * Suorittaa "heapify"-toiminnon kekoehdon täyttämiseksi annetusta
      * solmusta alaspäin. Toiminto siirtää käsiteltävän solmun omalle
      * paikalleen minimikeossa sen prioriteetin perusteella ja jatkaa
-     * toimintaansa rekursiivisesti, kunnes kaikki solmut annetusta solmun
-     * indeksistä täyttävät kekoehdon. Toiminnon aikavaativuus on O(log n).
+     * toimintaansa solmun polkua pitkin, kunnes kaikki solmut annetusta
+     * solmun indeksistä täyttävät kekoehdon. Toiminnon aikavaativuus on
+     * O(log n).
      * 
      * @param index käsiteltävän solmun indeksi minimikeon taulukossa
      */

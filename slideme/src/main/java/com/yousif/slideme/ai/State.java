@@ -5,7 +5,7 @@ import com.yousif.slideme.core.Array;
 /**
  * Tekoälyn välivaiheita ylläpitävä luokka.
  * 
- * @author Yousif Abdullah {@literal<yousif.abdullah@helsinki.fi>}
+ * @author Yousif Abdullah (yousif.abdullah@helsinki.fi)
  */
 public class State implements Comparable<State> {
     

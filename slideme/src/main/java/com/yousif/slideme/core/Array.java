@@ -3,7 +3,7 @@ package com.yousif.slideme.core;
 /**
  * Apuluokka int[]-taulukon käsittelylle.
  * 
- * @author Yousif Abdullah {@literal<yousif.abdullah@helsinki.fi>}
+ * @author Yousif Abdullah (yousif.abdullah@helsinki.fi)
  */
 public class Array {
     
@@ -62,7 +62,7 @@ public class Array {
      * aikavaativuudella. Erityisesti on huomioitava, että pelitilanne
      * säilytetään taulukkona, jossa 0 merkitsee vapaaruutua, eikä lukua 0.
      * Toisin sanoen inversioita ei lasketa niille pareille, joissa
-     * {@literal i < j, A[i] > A[j] ja A[j] == 0} annetulla taulukolla A.
+     * {@literal i < j, A[i] > A[j] ja A[j] = 0} annetulla taulukolla A.
      * 
      * @param array tarkistettava int[]-taulukko
      * @see com.yousif.slideme.core.Array#swapFirstInversion(int[])
@@ -102,8 +102,8 @@ public class Array {
     
     /**
      * Aputoiminto shuffleWithEvenInversions()-metodille, joka korjaa
-     * annetun taulukon alkioiden järjestyksen etsimällä ensimmäisen
-     * inversion muodostavan indeksiparin ja vaihtaa alkiot keskenään.
+     * annetun taulukon alkioiden järjestyksen hakemalla ensimmäisen
+     * inversion muodostavan indeksiparin ja vaihtamalla alkiot keskenään.
      * 
      * Siis inversioiden määrä vähenee yhdellä, mikä on toivottua, kun
      * inversioita on aluksi pariton määrä. Tällöin päädytään järjestykseen,

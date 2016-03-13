@@ -1,24 +1,28 @@
 package com.yousif.slideme.struc;
 
 import com.yousif.slideme.ai.State;
-import org.junit.BeforeClass;
+import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
  * MinHeap-tietorakenteen yksikkötestit.
  * 
- * @author Yousif Abdullah {@literal<yousif.abdullah@helsinki.fi>}
+ * @author Yousif Abdullah (yousif.abdullah@helsinki.fi)
  */
 public class MinHeapTest {
+    
+    private MinHeap test;
     
     private static State a;
     private static State b;
     private static State c;
     private static State d;
     
-    @BeforeClass
-    public static void setUpClass() {
+    @Before
+    public void setUpBefore() {
+        this.test = new MinHeap<>();
+        
         /*
         Yksikkötestit suoritetaan tarpeeseen räätälöidyillä State-tietueilla,
         joiden prioriteetti on laskettu valmiiksi. Huom. yksikkötestit eivät
@@ -35,58 +39,47 @@ public class MinHeapTest {
     
     @Test
     public void isEmptyOnInitialization() {
-        MinHeap test = new MinHeap<>();
-        
-        assertTrue(test.isEmpty());
+        assertTrue(this.test.isEmpty());
     }
     
     @Test
     public void isNotEmptyAfterInsertion() {
-        MinHeap test = new MinHeap<>();
-        test.insert(MinHeapTest.a);
+        this.test.insert(MinHeapTest.a);
         
-        assertFalse(test.isEmpty());
+        assertFalse(this.test.isEmpty());
     }
     
     @Test
     public void isEmptyAfterInsertionAndRetrieval() {
-        MinHeap test = new MinHeap<>();
+        this.test.insert(MinHeapTest.a);
+        this.test.retrieve();
         
-        test.insert(MinHeapTest.a);
-        test.retrieve();
-        
-        assertTrue(test.isEmpty());
+        assertTrue(this.test.isEmpty());
     }
     
     // MinHeap.retrieve() ja .insert() -metodien yksikkötestit.
     
     @Test
     public void retrieveFromEmpty() {
-        MinHeap test = new MinHeap<>();
-        
-        assertEquals(null, test.retrieve());
+        assertEquals(null, this.test.retrieve());
     }
     
     @Test
     public void retrieveAfterInsertion() {
-        MinHeap test = new MinHeap<>();
-        
-        test.insert(MinHeapTest.a);
-        State retrieved = (State) test.retrieve();
+        this.test.insert(MinHeapTest.a);
+        State retrieved = (State) this.test.retrieve();
         
         assertEquals(MinHeapTest.a, retrieved);
     }
     
     @Test
-    public void retrieveLowestPriority() {
-        MinHeap test = new MinHeap<>();
+    public void retrieveLowestPriority() {        
+        this.test.insert(MinHeapTest.a);
+        this.test.insert(MinHeapTest.b);
+        this.test.insert(MinHeapTest.d);
+        this.test.insert(MinHeapTest.c);
         
-        test.insert(MinHeapTest.a);
-        test.insert(MinHeapTest.b);
-        test.insert(MinHeapTest.d);
-        test.insert(MinHeapTest.c);
-        
-        State retrieved = (State) test.retrieve();
+        State retrieved = (State) this.test.retrieve();
         
         assertEquals(MinHeapTest.d, retrieved);
     }

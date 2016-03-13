@@ -7,7 +7,7 @@ import static org.junit.Assert.*;
 /**
  * UniqueSet-tietorakenteen yksikkötestit.
  * 
- * @author Yousif Abdullah {@literal<yousif.abdullah@helsinki.fi>}
+ * @author Yousif Abdullah (yousif.abdullah@helsinki.fi)
  */
 public class UniqueSetTest {
     

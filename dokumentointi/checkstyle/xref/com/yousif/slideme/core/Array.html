@@ -11,7 +11,7 @@
 <a class="jxr_linenumber" name="L3" href="#L3">3</a>   <em class="jxr_javadoccomment">/**</em>
 <a class="jxr_linenumber" name="L4" href="#L4">4</a>   <em class="jxr_javadoccomment"> * Apuluokka int[]-taulukon käsittelylle.</em>
 <a class="jxr_linenumber" name="L5" href="#L5">5</a>   <em class="jxr_javadoccomment"> * </em>
-<a class="jxr_linenumber" name="L6" href="#L6">6</a>   <em class="jxr_javadoccomment"> * @author Yousif Abdullah {@literal&lt;yousif.abdullah@helsinki.fi&gt;}</em>
+<a class="jxr_linenumber" name="L6" href="#L6">6</a>   <em class="jxr_javadoccomment"> * @author Yousif Abdullah (yousif.abdullah@helsinki.fi)</em>
 <a class="jxr_linenumber" name="L7" href="#L7">7</a>   <em class="jxr_javadoccomment"> */</em>
 <a class="jxr_linenumber" name="L8" href="#L8">8</a>   <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">class</strong> <a href="../../../../com/yousif/slideme/core/Array.html">Array</a> {
 <a class="jxr_linenumber" name="L9" href="#L9">9</a>       
@@ -70,7 +70,7 @@
 <a class="jxr_linenumber" name="L62" href="#L62">62</a>  <em class="jxr_javadoccomment">     * aikavaativuudella. Erityisesti on huomioitava, että pelitilanne</em>
 <a class="jxr_linenumber" name="L63" href="#L63">63</a>  <em class="jxr_javadoccomment">     * säilytetään taulukkona, jossa 0 merkitsee vapaaruutua, eikä lukua 0.</em>
 <a class="jxr_linenumber" name="L64" href="#L64">64</a>  <em class="jxr_javadoccomment">     * Toisin sanoen inversioita ei lasketa niille pareille, joissa</em>
-<a class="jxr_linenumber" name="L65" href="#L65">65</a>  <em class="jxr_javadoccomment">     * {@literal i &lt; j, A[i] &gt; A[j] ja A[j] == 0} annetulla taulukolla A.</em>
+<a class="jxr_linenumber" name="L65" href="#L65">65</a>  <em class="jxr_javadoccomment">     * {@literal i &lt; j, A[i] &gt; A[j] ja A[j] = 0} annetulla taulukolla A.</em>
 <a class="jxr_linenumber" name="L66" href="#L66">66</a>  <em class="jxr_javadoccomment">     * </em>
 <a class="jxr_linenumber" name="L67" href="#L67">67</a>  <em class="jxr_javadoccomment">     * @param array tarkistettava int[]-taulukko</em>
 <a class="jxr_linenumber" name="L68" href="#L68">68</a>  <em class="jxr_javadoccomment">     * @see com.yousif.slideme.core.Array#swapFirstInversion(int[])</em>
@@ -110,8 +110,8 @@
 <a class="jxr_linenumber" name="L102" href="#L102">102</a>     
 <a class="jxr_linenumber" name="L103" href="#L103">103</a>     <em class="jxr_javadoccomment">/**</em>
 <a class="jxr_linenumber" name="L104" href="#L104">104</a> <em class="jxr_javadoccomment">     * Aputoiminto shuffleWithEvenInversions()-metodille, joka korjaa</em>
-<a class="jxr_linenumber" name="L105" href="#L105">105</a> <em class="jxr_javadoccomment">     * annetun taulukon alkioiden järjestyksen etsimällä ensimmäisen</em>
-<a class="jxr_linenumber" name="L106" href="#L106">106</a> <em class="jxr_javadoccomment">     * inversion muodostavan indeksiparin ja vaihtaa alkiot keskenään.</em>
+<a class="jxr_linenumber" name="L105" href="#L105">105</a> <em class="jxr_javadoccomment">     * annetun taulukon alkioiden järjestyksen hakemalla ensimmäisen</em>
+<a class="jxr_linenumber" name="L106" href="#L106">106</a> <em class="jxr_javadoccomment">     * inversion muodostavan indeksiparin ja vaihtamalla alkiot keskenään.</em>
 <a class="jxr_linenumber" name="L107" href="#L107">107</a> <em class="jxr_javadoccomment">     * </em>
 <a class="jxr_linenumber" name="L108" href="#L108">108</a> <em class="jxr_javadoccomment">     * Siis inversioiden määrä vähenee yhdellä, mikä on toivottua, kun</em>
 <a class="jxr_linenumber" name="L109" href="#L109">109</a> <em class="jxr_javadoccomment">     * inversioita on aluksi pariton määrä. Tällöin päädytään järjestykseen,</em>

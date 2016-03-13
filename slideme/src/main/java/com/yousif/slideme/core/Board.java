@@ -3,7 +3,7 @@ package com.yousif.slideme.core;
 /**
  * Pelitilannetta ylläpitävä luokka.
  * 
- * @author Yousif Abdullah {@literal<yousif.abdullah@helsinki.fi>}
+ * @author Yousif Abdullah (yousif.abdullah@helsinki.fi)
  */
 public final class Board {
     

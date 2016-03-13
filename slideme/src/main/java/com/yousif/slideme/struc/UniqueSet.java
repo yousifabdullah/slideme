@@ -3,7 +3,7 @@ package com.yousif.slideme.struc;
 /**
  * Erikoistietorakenne 8-pelille, joka korvaa HashSet-tietorakenteen.
  * 
- * @author Yousif Abdullah {@literal<yousif.abdullah@helsinki.fi>}
+ * @author Yousif Abdullah (yousif.abdullah@helsinki.fi)
  */
 public class UniqueSet {
     
